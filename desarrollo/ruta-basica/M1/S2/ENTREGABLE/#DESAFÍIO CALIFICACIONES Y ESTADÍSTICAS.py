@@ -1,4 +1,4 @@
-# Desafío de Calificaciones y Estadísticas - Nivel Principiante
+# Desafío de Calificaciones y Estadísticas - Nivel Principiante.
 
 # Paso 1: Determinar el estado de aprobación
 calificacion = input("1️⃣ Ingresa una calificación (0 a 100): ")

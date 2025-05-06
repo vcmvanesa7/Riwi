@@ -91,8 +91,27 @@ datos = {
     }
     
 }
-print (datos["Andres"]["gustos"]["hobbies"]["genero_cine"])
-print(len(datos))
+print (datos["Andres"]["gustos"]["hobbies"]["genero_cine"]) #Acceder a elementos específicos
+print(len(datos)) #conocer cantidad de elementos de un diccionario
+hobbies = datos["Andres"]["gustos"]["hobbies"] #Guardar en una variable parte del diccionario si voy a acceder muchas veces a ella.
+print(hobbies["genero_literario"])
+print(type(datos)) #mostrar tipo de dato (dict), para diccionarios.
+print(datos.keys()) #return all the keys in the dictionary.
+datos["Dana"]["hobbie"] = "Surf" #Agregar un elemento
+print(datos["Dana"]["hobbie"])
+print(datos.values())
+datos["Andres"]["gustos"]["hobbies"]["genero_cine"] = "Romance"
+print(datos["Andres"]["gustos"]["hobbies"]["genero_cine"])
+print(datos["Andres"].items())
 
 
+#Check if key exists
+if "tennis" in datos:
+    print ("Se encuentra en el diccionario")
+else:
+    print ("No se encuentra en el diccionario")
 #diccionarios en listas
+
+
+datos["Dana"].update({"nombre":"Dana Paola"}) #Hacer cambios con (.update)
+print(datos["Dana"]["nombre"])

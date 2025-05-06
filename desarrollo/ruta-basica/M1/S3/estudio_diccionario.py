@@ -55,8 +55,44 @@ print(promedio) #Como promedio no existe dentro de diccionario, imprime no se en
 
 
 #Ciclo FOR, para iterar sobre ellos(métodos), facilitando el manejo de los diccionarios.
-persona={
+persona2={
     "nombre":"Alejandra",
     "edad": 24,
     "ciudad":"medellín"
 }
+
+
+
+#Diccionarios anidados
+datos = {
+    "Andres": { 
+        "nombre":"Andres Restrepo",
+        "edad" : 32,
+        "cedula" : 1125587458,
+        "correo" : "andres32@gmail.com",
+        "gustos" : {
+            "color" : "Azul",
+            "comida" : "sushi",
+            "mascota_fav" : "perro",
+            "hobbies" : {
+                "deporte" : "natacion",
+                "musica" : "Rock",
+                "genero_literario" : "Drama",
+                "genero_cine" : "Ciencia ficción"
+                }
+            }
+        },
+
+    "Dana": {
+        "nombre":"dana",
+        "edad" : 25,
+        "cedula" : 1187421958,
+        "correo" : "danita01@gmail.com"
+    }
+    
+}
+print (datos["Andres"]["gustos"]["hobbies"]["genero_cine"])
+print(len(datos))
+
+
+#diccionarios en listas

@@ -43,7 +43,7 @@ while True:
             dinero_disponible -= Tres_quesos
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += Tres_quesos
-            pedido.append(f"Pollo ${Pollo}")
+            pedido.append(f"Tres Quesos ${Tres_quesos}")
             break
         
         case 4:
@@ -51,7 +51,7 @@ while True:
             dinero_disponible -= mixta
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += mixta
-            pedido.append(f"Pollo ${Pollo}")
+            pedido.append(f"Mixta ${mixta}")
             break
         
         case _:
@@ -81,14 +81,14 @@ while True:
             dinero_disponible -= extra_peperoni
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += extra_peperoni
-            pedido.append(f"Queso Extra ${extra_peperoni}")
+            pedido.append(f"Peperoni Extra ${extra_peperoni}")
 
         case 4:
             print(f"\nHa elegido 'Queso Crema Extra'.\nTotal a pagar: ${extraqueso_crema}")
             dinero_disponible -= extraqueso_crema
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += extraqueso_crema
-            pedido.append(f"Queso Extra ${extraqueso_crema}")
+            pedido.append(f"Queso Crema Extra ${extraqueso_crema}")
 
         case 5:
             print ("\nPerefecto, ¡no se añade nada extra!")

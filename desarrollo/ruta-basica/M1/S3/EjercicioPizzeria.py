@@ -19,47 +19,47 @@ extraqueso_crema = 2.50
 while True:
     print("\n...MENÚ...\nElige tu pizza🍕\n")
     print(f"1- Napolitana - ${Napolitana}\n2- Pollo ${Pollo}\n3- Tres Quesos ${Tres_quesos}\n4- Mixta ${mixta}")
-    eleccion = int(input("Elige una opción del 1 al 4: "))
+    eleccion = int(input("Elige una opción del 1 al 4: \n"))
     
     match eleccion:
         case 1:
-            print(f"\nHa elegido la pizza 'Napolitana'.\nTotal a pagar: ${Napolitana}")
+            print(f"\nHa elegido la pizza Napolitana.\nTotal a pagar: ${Napolitana}")
             dinero_disponible -= Napolitana
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += Napolitana
-            pedido.append(f"Napolitana ${Napolitana}")
+            pedido.append(f"Pizza Napolitana ${Napolitana}")
             break
      
         case 2:
-            print(f"\nHa elegido la pizza 'Pollo'.\nTotal a pagar: ${Pollo}")
+            print(f"\nHa elegido la pizza Pollo.\nTotal a pagar: ${Pollo}")
             dinero_disponible -= Pollo
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += Pollo
-            pedido.append(f"Pollo ${Pollo}")
+            pedido.append(f"Pizza Pollo ${Pollo}")
             break
      
         case 3:
-            print(f"\nHa elegido la pizza 'Tres Quesos'.\nTotal a pagar: ${Tres_quesos}")
+            print(f"\nHa elegido la pizza Tres Quesos.\nTotal a pagar: ${Tres_quesos}")
             dinero_disponible -= Tres_quesos
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += Tres_quesos
-            pedido.append(f"Tres Quesos ${Tres_quesos}")
+            pedido.append(f"Pizza Tres Quesos ${Tres_quesos}")
             break
         
         case 4:
-            print(f"\nHa elegido la pizza 'Mixta'.\nTotal a pagar: ${mixta}")
+            print(f"\nHa elegido la pizza Mixta.\nTotal a pagar: ${mixta}")
             dinero_disponible -= mixta
             print(f"Le queda ${round(dinero_disponible,2)}.")
             Total += mixta
-            pedido.append(f"Mixta ${mixta}")
+            pedido.append(f"Pizza Mixta ${mixta}")
             break
         
         case _:
             print("\nOpción Inválida. Seleccione una opción del 1 al 4")
 
 while True:
-    print(f"\nIngredientes extras:\n...Elige una opción de 1 al 5...\n\n1.Queso   ${extra_queso}\n2.Tocineta  ${extra_tocineta}\n3.Peperoni   ${extra_peperoni}\n4.Queso Crema    ${extraqueso_crema}\n5.No añadir nada y pagar")
-    eleccion = int(input("\nSi deseas añadir un ingrediente extra, selecciona el número del ingrediente, de lo contrario escribe '5': "))
+    print(f"\nIngredientes extras:\n1.Queso   ${extra_queso}\n2.Tocineta  ${extra_tocineta}\n3.Peperoni   ${extra_peperoni}\n4.Queso Crema    ${extraqueso_crema}\n5.No añadir nada y pagar")
+    eleccion = int(input("\n...Elige una opción de 1 al 5: "))
 
     match eleccion:
         case 1:
@@ -91,20 +91,20 @@ while True:
             pedido.append(f"Queso Crema Extra ${extraqueso_crema}")
 
         case 5:
-            print ("\nPerefecto, ¡no se añade nada extra!")
+            print ("Perefecto, ¡no se añade nada extra!")
             break
 
         case _:
             print("\nOpción Inválida. Seleccione una opción del 1 al 5")
 
 if Total <= dinero_inicial:
-    print("\n---------- SU PEDIDO ----------\n")
+    print("\n\n---------- SU PEDIDO ----------\n")
     for i in pedido:
         print(f"-{i}")
     print(f"\nEl total de su pedido es: ${Total}.")
     print(f"Su cambio es: ${round(dinero_inicial - Total, 2)}")
-    print("\nGracias por tu compra, ¡Disfrútala!")
+    print("\nGracias por tu compra, ¡Disfrútala!\n\n")
 else:
-    print("\nNo tienes suficiente dinero para este pedido.")
+    print("\nNo tienes suficiente dinero para este pedido.\n\n")
 
     

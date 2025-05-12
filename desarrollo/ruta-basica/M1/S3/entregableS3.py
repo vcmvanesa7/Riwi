@@ -222,3 +222,12 @@ def menu():
 
 
 menu()
+
+#producto = input("Ingrese el nombre del producto a actualizar: ")
+
+if producto in inventario:
+    nuevo_precio = float(input("Ingrese el nuevo precio: "))
+    inventario[producto]["precio"] = nuevo_precio
+    print("Precio actualizado correctamente.")
+else:
+    print("Producto no encontrado en el inventario.")

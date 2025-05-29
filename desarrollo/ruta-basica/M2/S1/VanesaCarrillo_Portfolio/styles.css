@@ -1,0 +1,817 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: linear-gradient(to left, #4777e6ee, #721bfddd), url(./img/pattern.jpg);
+    background-repeat: no-repeat;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+/* HEADER */
+.header-container {
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.site-header {
+    background-color: rgba(255, 255, 255, 0.438);
+    color: white;
+    padding: 20px 0px;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    -webkit-border-radius: 1h0px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 200px;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    font-size: larger;
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -ms-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #ff4524;
+}
+
+
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 100px 0px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 64px;
+    /* ← Añade espacio entre los elementos hijos */
+}
+
+.hero-text h1 {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+}
+
+.hello {
+    font-family: 'Dancing Script';
+    font-size: 120px;
+    margin-bottom: 2.5rem;
+}
+
+.hello::after {
+    content: "";
+    display: block;
+    height: 1em;
+    animation: text 20s linear infinite;
+}
+
+@keyframes text {
+    0% {
+        content: ""
+    }
+
+    .5% {
+        content: "¡"
+    }
+
+    1% {
+        content: "¡H"
+    }
+
+    1.5% {
+        content: "¡Ho"
+    }
+
+    2% {
+        content: "¡Hol"
+    }
+
+    2.5% {
+        content: "¡Hola"
+    }
+
+    3% {
+        content: "¡Hola!"
+    }
+
+    15.3% {
+        content: "¡Hola!"
+    }
+
+    15.7% {
+        content: "¡Hola"
+    }
+
+    16% {
+        content: "¡Hol"
+    }
+
+    16.3% {
+        content: "¡Ho"
+    }
+
+    16.6% {
+        content: "¡H"
+    }
+
+    16.9% {
+        content: "¡"
+    }
+
+    17% {
+        content: ""
+    }
+
+    18.5% {
+        content: "안"
+    }
+
+    19% {
+        content: "안녕"
+    }
+
+    30.5% {
+        content: "안녕"
+    }
+
+    31.5% {
+        content: "안"
+    }
+
+    32% {
+        content: ""
+    }
+
+    32.5% {
+        content: "C"
+    }
+
+    33% {
+        content: "Ci"
+    }
+
+    33.5% {
+        content: "Cia"
+    }
+
+    34% {
+        content: "Ciao"
+    }
+
+    46.9% {
+        content: "Ciao"
+    }
+
+    47.2% {
+        content: "Cia"
+    }
+
+    47.5% {
+        content: "Ci"
+    }
+
+    47.8% {
+        content: "C"
+    }
+
+    48% {
+        content: ""
+    }
+
+    48.5% {
+        content: "O"
+    }
+
+    49.5% {
+        content: "Ol"
+    }
+
+    50.5% {
+        content: "Olá"
+    }
+
+    62.8% {
+        content: "Olá"
+    }
+
+    63.4% {
+        content: "Ol"
+    }
+
+    63.8% {
+        content: "O"
+    }
+
+    64% {
+        content: ""
+    }
+
+    64.5% {
+        content: "B"
+    }
+
+    65% {
+        content: "Bo"
+    }
+
+    65.5% {
+        content: "Bon"
+    }
+
+    66% {
+        content: "Bonj"
+    }
+
+    66.5% {
+        content: "Bonjo"
+    }
+
+    67% {
+        content: "Bonjou"
+    }
+
+    67.5% {
+        content: "Bonjour"
+    }
+
+    78% {
+        content: "Bonjour"
+    }
+
+    78.3% {
+        content: "Bonjou"
+    }
+
+    78.6% {
+        content: "Bonjo"
+    }
+
+    78.9% {
+        content: "Bonj"
+    }
+
+    79.2% {
+        content: "Bon"
+    }
+
+    79.5% {
+        content: "Bo"
+    }
+
+    79.8% {
+        content: "B"
+    }
+
+    80% {
+        content: ""
+    }
+
+    80.2% {
+        content: "H"
+    }
+
+    80.6% {
+        content: "He"
+    }
+
+    80.9% {
+        content: "Hel"
+    }
+
+    81.2% {
+        content: "Hell"
+    }
+
+    81.5% {
+        content: "Hello"
+    }
+
+    82% {
+        content: "Hello!"
+    }
+
+    98.3% {
+        content: "Hello!"
+    }
+
+    98.6% {
+        content: "Hello"
+    }
+
+    98.9% {
+        content: "Hell"
+    }
+
+    99.2% {
+        content: "Hel"
+    }
+
+    99.5% {
+        content: "He"
+    }
+
+    99.8% {
+        content: "H"
+    }
+
+    100% {
+        content: ""
+    }
+}
+
+.hero-imagen img {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid #f86f2f;
+    box-shadow: 0 16px 14px rgba(0, 0, 0, 0.2);
+}
+
+.hero-text {
+    max-width: 450px;
+    margin-left: 6rem;
+}
+
+
+.hero-text p {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 20px;
+
+}
+
+.hero-text .highlight {
+    color: #ffffff;
+    font-size: 80px;
+    line-height: 0.9;
+    /* ← Esto es el interlineado */
+}
+
+.rotated {
+    display: inline-block;
+    background-color: #ff7100;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 10px;
+    transform: rotate(-10deg);
+    /* Puedes cambiar el ángulo */
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    transform: rotate(-2deg);
+}
+
+.main-content {
+    padding: 32px;
+}
+
+.container {
+    max-width: 2100px;
+    margin: 0 auto;
+    padding: 0 0px;
+    /* Espacio a los lados para pantallas pequeñas */
+}
+
+.about-me {
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.074);
+    /* blanco con opacidad */
+    padding: 60px 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+}
+
+.about-text {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.about-text h2 {
+    font-family: 'Bebas Neue';
+    color: #ffffff;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about-text h2::after {
+    content: "";
+    display: block;
+    width: 120px;
+    height: 6px;
+    margin-top: 8px;
+    background-color: #ff7100;
+    border-radius: 100px;
+}
+
+.about-text p {
+    color: #f3f3f3;
+    font-size: 20px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.ul-skills {
+    color: #5800d4;
+}
+
+.skills h2 {
+    font-family: 'Bebas Neue';
+    font-size: 40px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.skill {
+    margin-bottom: 20px;
+}
+
+.skill span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffcc70;
+}
+
+.skill-bar {
+    background-color: #ffffff33;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background-color: #ff7100;
+    border-radius: 10px;
+}
+
+.skills-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px 70px;
+    flex-wrap: wrap;
+    backdrop-filter: blur(6px);
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 63px;
+}
+
+.skills {
+    flex: 1;
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.skills-image {
+    max-width: 500px;
+}
+
+.skills-image img {
+    width: 100%;
+    margin-left: 6rem;
+}
+
+/* Ajusta el nivel */
+.python {
+    width: 10%;
+}
+
+.html {
+    width: 20%;
+}
+
+.css {
+    width: 20%;
+}
+
+.illustrator {
+    width: 80%;
+}
+
+.premiere {
+    width: 60%;
+}
+
+.aftereffects {
+    width: 30%;
+}
+
+.projects {
+    text-align: center;
+    padding: 60px 40px;
+    background-color: #ffffff10;
+}
+
+.titleProject-table {
+    font-family: 'Bebas Neue';
+    text-align: center;
+    margin-top: 10rem;
+    color: #f9f9f9;
+}
+
+.projects h2 {
+    font-family: 'Bebas Neue';
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.borderpic {
+    border-radius: 12%;
+    margin: 20px;
+}
+
+.project-card {
+    border: 6px solid #ff7100;
+    grid-template-columns: auto;
+    padding: 20px 30px;
+    margin: 20px auto;
+    border-radius: 40px;
+    max-width: 1000px;
+
+}
+
+.project-card h3 {
+    font-size: 40 px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.project-card p {
+    color: #f3f3f3;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.project-table {
+    border: 6px solid #ff7100;
+    width: 66%;
+    /* Más angosta */
+    margin: 30px auto;
+    /* Centrada */
+    border-radius: 26px;
+    margin-block: 3rem;
+    overflow: hidden;
+
+}
+
+.project-table th,
+.project-table td {
+    padding: 12px 18px;
+    text-align: left;
+    color: #FFF;
+
+}
+
+.project-table th {
+    font-size: 16px;
+    padding: 0 .5rem;
+}
+
+.project-table th .th-title {
+    padding: .75rem 1rem;
+    display: block;
+    border-radius: 11.6px;
+    color: #ffffff;
+    width: 100%;
+}
+
+.project-table a {
+    color: #ffc18e;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.contact {
+    text-align: center;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    width: 60%;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #6a00ff;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.contact-form button {
+    background-color: #6a00ff;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #5800d4;
+}
+
+/* Contact box */
+
+.contact {
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    color: white;
+}
+
+.contact h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact li {
+    margin-bottom: 10px;
+    color: #ffcc70;
+}
+
+.social-media {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.social-icons img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+.main-nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+    gap: 50px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 10px 50px;
+    font-size: 30px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #ffcc70;
+}
+
+
+/* Footer*/
+.site-footer {
+    background-color: #33333344;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+    margin-top: 60px;
+    box-shadow: #333;
+}
+
+.site-footer p {
+    margin: 0 0 10px;
+}
+
+.footer-social a {
+    color: #ffffff;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #ff7100;
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .header-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+}
+
+.footer-social a i {
+    font-size: 24px;
+    margin: 0 10px;
+    color: white;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a i:hover {
+    color: #ff7100;
+    /* Color típico de WhatsApp */
+    transform: scale(1.3);
+}

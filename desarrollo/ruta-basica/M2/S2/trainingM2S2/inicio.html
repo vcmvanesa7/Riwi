@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio - Medellín 360°</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <link rel="icon" type="image/png" href="logoMiniatura.png" />
+</head>
+
+<body>
+  <header>
+    <img src="LogoMedellín360.png" alt="Logo Medellín 360°" class="logo-header" />
+    <nav>
+      <a href="#categorias">Categorías</a>
+      <a href="#top">Top Lugares</a>
+      <a href="#about">Sobre Nosotros</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="categorias">
+      <h2>Categorías</h2>
+      <div class="grid-categorias">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Café en Medellín">
+          <h3>Cafés con Encanto</h3>
+          <div class="estrellas" data-valor="0">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Gastronomía Paisa">
+          <h3>Gastronomía Paisa</h3>
+          <div class="estrellas" data-valor="0">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Arte y Cultura">
+          <h3>Arte y Cultura</h3>
+          <div class="estrellas" data-valor="0">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="top">
+      <h2>Top Lugares</h2>
+      <p>Explora los mejor calificados por la comunidad.</p>
+    </section>
+
+    <section id="about">
+      <h2>Sobre Medellín 360°</h2>
+      <p>
+        Somos una iniciativa de turismo de calidad en Medellín. Conectamos a visitantes y locales
+        con lo mejor de la ciudad: cafés escondidos, gastronomía auténtica, arte urbano, cultura viva
+        y lugares por descubrir.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Medellín 360°. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const estrellas = document.querySelectorAll('.estrellas');
+
+    estrellas.forEach(estrellado => {
+      const spans = estrellado.querySelectorAll('span');
+      spans.forEach((star, index) => {
+        star.addEventListener('mouseover', () => {
+          spans.forEach((s, i) => s.classList.toggle('hovered', i <= index));
+        });
+        star.addEventListener('mouseout', () => {
+          spans.forEach((s, i) => s.classList.remove('hovered'));
+        });
+        star.addEventListener('click', () => {
+          estrellado.dataset.valor = index + 1;
+          spans.forEach((s, i) => s.classList.toggle('seleccionada', i < index + 1));
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+/* Estilos globales */
+@font-face {
+    font-family: 'Quakerhack';
+    src: url('Quakerhack.ttf') format('truetype');
+}
+
+:root {
+    --azul: #092B47;
+    --naranja: #FF8931;
+    --blanco: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quakerhack', sans-serif;
+}
+
+body {
+    background: url('texture.png') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--blanco);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor login */
+.login-container {
+    background: rgba(9, 43, 71, 0.9);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 1.2s ease;
+}
+
+.login-container img.logo {
+    width: 80px;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--naranja);
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+input,
+select {
+    padding: 0.7rem;
+    border: none;
+    border-radius: 6px;
+    background: #f0f0f0;
+    color: #333;
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: #666;
+}
+
+button {
+    padding: 0.8rem;
+    background: var(--naranja);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #e57b2c;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 1.5rem;
+    }
+
+    .login-container h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos adicionales para inputs enfocados */
+input:focus,
+select:focus {
+    outline: 2px solid var(--naranja);
+    background: #fff;
+}
+
+/* Pseudoelementos decorativos */
+.login-container::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 50px;
+    height: 50px;
+    background: var(--naranja);
+    border-radius: 50%;
+    opacity: 0.4;
+    z-index: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+}

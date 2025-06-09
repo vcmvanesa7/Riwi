@@ -5,156 +5,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medellín 360° - Login</title>
-    <link rel="icon" href="logoMiniatura.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background:
-                linear-gradient(rgba(9, 43, 71, 0.842), rgba(13, 73, 122, 0.7)),
-                url('https://hablandoenvidrio.com/wp-content/uploads/2019/09/50MF099.jpg'),
-                url(./assets/img/texture.png);
-            background-size: cover, cover, cover;
-            background-position: center, center, center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
-
-        .login-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            width: 100%;
-            max-width: 400px;
-            position: relative;
-        }
-
-        .login-container img {
-            display: block;
-            margin: 0 auto 1rem auto;
-            width: 120px;
-        }
-
-
-        h2 {
-            text-align: center;
-            color: #FF8931;
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-top: 1rem;
-            font-weight: bold;
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.3rem;
-            border: none;
-            border-radius: 5px;
-        }
-
-        button {
-            width: 100%;
-            margin-top: 1.5rem;
-            background-color: #FF8931;
-            border: none;
-            color: white;
-            font-weight: bold;
-            padding: 0.7rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e67a2c;
-        }
-
-        .mensaje {
-            text-align: center;
-            margin-top: 1rem;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .loader {
-            display: none;
-            margin: 1rem auto;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #FF8931;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    <link rel="icon" href="./assets/img/logoMiniatura.png" type="image/png" />
+    <link rel="stylesheet" href="./slyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Belleza&family=Dancing+Script:wght@400..700&family=Freeman&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
     <div class="login-container">
-        <img class="logo_login" src="./assets/img/LogoMedellín360.png" alt="Logo Medellín 360°">
-        <h2>Bienvenido a Medellín 360°</h2>
+        <article class="article">
 
-        <form id="loginForm">
-            <label for="rol">Soy:</label>
-            <select id="rol" name="rol">
-                <option value="usuario">Usuario</option>
-                <option value="propietario">Propietario</option>
-            </select>
+            <section>
+                <img class="logo_login" src="./assets/img/LogoMedellín360.png" alt="Logo Medellín 360°">
+            </section>
+            <section>
+                <h2>¡BIENVENIDO!</h2>
+                <p class="bienvenida-texto">
+                    ¡Únete ahora a la plataforma que conecta personas con experiencias únicas
+                    en la ciudad! </p>
+            </section>
 
-            <label for="nombreNegocio">Nombre del negocio:</label>
-            <input type="text" id="nombreNegocio" name="nombreNegocio" required>
+        </article>
+        <section>
+            <form id="loginForm">
 
-            <label for="nombrePropietario">Nombre del propietario:</label>
-            <input type="text" id="nombrePropietario" name="nombrePropietario" required>
+                <label for="nombreNegocio">Nombre del negocio:</label>
+                <input class="input" type="text" id="nombreNegocio" name="nombreNegocio" required>
 
-            <label for="categoria">Categoría del negocio:</label>
-            <select id="categoria" name="categoria">
-                <option value="arte">Arte</option>
-                <option value="cultura">Cultura</option>
-                <option value="gastronomia">Gastronomía</option>
-                <option value="cafe">Café</option>
-                <option value="entretenimiento">Entretenimiento</option>
-            </select>
+                <label for="nombrePropietario">Nombre del propietario:</label>
+                <input class="input" type="text" id="nombrePropietario" name="nombrePropietario" required>
 
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion" required>
+                <label for="categoria">Categoría del negocio:</label>
+                <select id="categoria" name="categoria">
+                    <option value="arte">Arte</option>
+                    <option value="cultura">Cultura</option>
+                    <option value="gastronomia">Gastronomía</option>
+                    <option value="cafe">Café</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                </select>
 
-            <label for="contacto">Contacto:</label>
-            <input type="text" id="contacto" name="contacto" required>
+                <label for="direccion">Dirección:</label>
+                <input class="input" type="text" id="direccion" name="direccion" required>
 
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+                <label for="contacto">Contacto:</label>
+                <input class="input" type="text" id="contacto" name="contacto" required>
 
-            <button type="submit">Registrarse</button>
-        </form>
-        <div class="loader" id="loader"></div>
-        <div class="mensaje" id="mensaje"></div>
+                <label for="password">Contraseña:</label>
+                <input class="input" type="password" id="password" name="password" required>
+
+                <button type="submit">Registrarse</button>
+            </form>
+            <div class="loader" id="loader"></div>
+            <div class="mensaje" id="mensaje"></div>
+        </section>
     </div>
 
     <script>
@@ -172,7 +80,7 @@
                 mensaje.textContent = '¡Registro exitoso! Redirigiendo...';
 
                 setTimeout(() => {
-                    window.location.href = 'inicio.html';
+                    window.location.href = 'home.html';
                 }, 2000);
             }, 2000);
         });

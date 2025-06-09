@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café de la loma</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Belleza&family=Dancing+Script:wght@400..700&family=Freeman&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!--Animación de Carga (Pantalla de Loading)-->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- ANIMACIÓN DE CARGA -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p class="loading-text">Cargando Blog De Café...</p>
+    </div>
+
+
+    <header>
+        <button id="toggleTema">🌙</button>
+        <nav class="nav-principal">
+            <div>
+                <h1><span>Blog</span>DeCafé</h1>
+            </div>
+            <ul class="containerlinksNav">
+                <li><a class="linkNav" href="./nosotros.html">Nosotros</a></li>
+                <li><a class="linkNav" href="#cursos">Cursos</a></li>
+                <li><a class="linkNav" href="#contacto">Contacto</a></li>
+            </ul>
+            <div>
+                <div class="hamburguesa" id="hamburguesa">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+        </nav>
+        <section class="hero">
+            <h2>Blog de café con consejos y cursos</h2>
+            <p>aprende de los expertos con las mejores recetas y consejos</p>
+        </section>
+    </header>
+
+
+    <main>
+        <section class="blog">
+            <article class="entrada1">
+                <h2>Nuestro Blog</h2>
+                <a href="./assets/img/blog1.jpg" data-lightbox="galeria" data-title="Tipos de café">
+                    <img src="./assets/img/blog1.jpg" alt="Imagen café molido">
+                </a>
+
+                <h3>Tipos de grano de café</h3>
+                <p>Los principales tipos de granos de café son Arábica, Robusta, Excelsa y Liberica. Arábica y
+                    Robusta son las más comunes y representan la mayor parte del mercado. El Arábica se caracteriza
+                    por su dulzor y aroma suave, mientras que el Robusta es más fuerte y amargo, con mayor contenido
+                    de cafeína. </p>
+                <button>LEER ENTRADA</button>
+            </article>
+            <aside class="columnacursos">
+                <h3>Nuestros cursos y talleres</h3>
+                <div class="curso">
+                    <h4>Técnicas de extraccion de café</h4>
+                    <p><strong>Precio:</strong> Gratis</p>
+                    <p><strong>Cupo:</strong> 20</p>
+                    <button>MÁS INFORMACIÓN</button>
+                </div>
+                <div class="curso">
+                    <h4>Cuatro recetas de café para principiantes</h4>
+                    <p><strong>Precio:</strong> Gratis</p>
+                    <p><strong>Cupo:</strong> 20</p>
+                    <button>MÁS INFORMACIÓN</button>
+                </div>
+            </aside>
+
+
+            <article class="entrada1">
+                <h2>Nuestro Blog</h2>
+                <img src="./assets/img/blog2.jpg" alt="Imagen café molido">
+                <h3>Tipos de grano de café</h3>
+                <p>Los principales tipos de granos de café son Arábica, Robusta, Excelsa y Liberica. Arábica y
+                    Robusta son las más comunes y representan la mayor parte del mercado. El Arábica se caracteriza
+                    por su dulzor y aroma suave, mientras que el Robusta es más fuerte y amargo, con mayor contenido
+                    de cafeína. </p>
+                <button>LEER ENTRADA</button>
+            </article>
+
+            <article class="entrada1">
+                <h2>Nuestro Blog</h2>
+                <img src="./assets/img/blog3.jpg" alt="Imagen café molido">
+                <h3>Tipos de grano de café</h3>
+                <p>Los principales tipos de granos de café son Arábica, Robusta, Excelsa y Liberica. Arábica y
+                    Robusta son las más comunes y representan la mayor parte del mercado. El Arábica se caracteriza
+                    por su dulzor y aroma suave, mientras que el Robusta es más fuerte y amargo, con mayor contenido
+                    de cafeína. </p>
+                <button>LEER ENTRADA</button>
+            </article>
+        </section>
+        <!--mapa -->
+        <section id="contacto">
+            <div class="mapa-contenedor">
+                <iframe class="mapa"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-75.594%2C6.223%2C-75.592%2C6.225&layer=mapnik&marker=6.2240%2C-75.5930"
+                    style="border: 0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+
+
+
+
+    </main>
+
+    <!--Footer -->
+    <footer>
+        <nav>
+            <div>
+                <h1><span>Blog</span>DeCafé</h1>
+            </div>
+            <ul class="containerlinksNav">
+                <li><a class="linkNav" href="#nosotros">Nosotros</a></li>
+                <li><a class="linkNav" href="#cursos">Cursos</a></li>
+                <li><a class="linkNav" href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script>
+        const hamburguesa = document.getElementById("hamburguesa");
+        const menu = document.querySelector(".containerlinksNav");
+
+        hamburguesa.addEventListener("click", () => {
+            menu.classList.toggle("active");
+            hamburguesa.classList.toggle("active"); // Para animar la hamburguesa
+        });
+    </script>
+    <script>
+        const toggleBtn = document.getElementById('toggleTema');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+    <!-- Lightbox2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
+
+    <!--(Pantalla de Loading.. solo se ve al recargar la página sin caché... Ctrl + Shift + R)-->
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('preloader');
+            loader.style.display = 'none';
+        });
+    </script>
+    <!--( animación de carga personalizada)-->
+    <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            loader.style.opacity = 0;
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 500); // espera la transición antes de ocultar
+        });
+    </script>
+
+
+    <script>
+        function initMap() {
+            const ubicacion = { lat: -33.4489, lng: -70.6693 }; // Cambia a tu ciudad
+            const mapa = new google.maps.Map(document.getElementById("mapa"), {
+                center: ubicacion,
+                zoom: 14,
+            });
+
+            new google.maps.Marker({
+                position: ubicacion,
+                map: mapa,
+                title: "Estamos aquí",
+            });
+        }
+    </script>
+
+    <!-- API de Google Maps (reemplaza TU_API_KEY por la tuya) -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap"></script>
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap">
+    </script>
+
+
+</body>
+
+</html>

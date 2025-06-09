@@ -1,0 +1,615 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'PT Sans';
+    box-sizing: border-box;
+
+}
+
+/*usar unidades responsive como vw, vh, em, rem para no depender tanto de media queries.*/
+body {
+    overflow-x: hidden;
+    /* Evita movimiento horizontal*/
+    width: 100%;
+}
+
+header {
+    background-image: url(./assets/img/banner.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 38.6rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.3rem 13rem 0 12rem;
+}
+
+nav div h1 {
+    color: #fff;
+    font-size: 3rem;
+}
+
+nav div h1 span {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.containerlinksNav li a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 400;
+    font-family: sans-serif;
+}
+
+/*Menú hamburguesa*/
+.hamburguesa {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.hamburguesa {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 30px;
+    height: 22px;
+    justify-content: space-between;
+    z-index: 1001;
+}
+
+.hamburguesa span {
+    height: 4px;
+    background: #fff;
+    border-radius: 4px;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+/* Estado activo para hacer la "X" */
+.hamburguesa.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburguesa.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburguesa.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.containerlinksNav {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.linkNav {
+    color: white;
+    text-decoration: none;
+}
+
+.linkNav:hover {
+    color: #986b59;
+    /* color café claro de los botones para hover */
+}
+
+
+/* Responsive*/
+@media (max-width: 768px) {
+    .containerlinksNav {
+        display: none;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .containerlinksNav.active {
+        display: flex;
+    }
+
+    .hamburguesa {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        width: 30px;
+        height: 22px;
+        justify-content: space-between;
+    }
+
+    .hamburguesa span {
+        height: 4px;
+        background: #fff;
+        border-radius: 4px;
+        transition: 0.3s ease;
+        width: 100%;
+    }
+
+    .blog {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .blog {
+        grid-template-columns: 2fr 1fr;
+        padding: 3rem;
+        max-width: 1200px;
+    }
+
+    nav {
+        padding: 2.3rem 13rem 0 12rem;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+    nav {
+        padding: 1.5rem 4rem;
+    }
+
+    .blog {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .entrada1 h2,
+    .entrada1 h3 {
+        text-align: center;
+    }
+
+    footer nav {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 767px) {
+    nav {
+        padding: 1rem 2rem;
+        flex-wrap: wrap;
+    }
+
+    .hero {
+        margin-top: 5rem;
+        padding: 0 1rem;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .blog {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .entrada1 h2,
+    .entrada1 h3,
+    .entrada1 p {
+        text-align: center;
+    }
+
+    .entrada1 button,
+    .curso button {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    footer nav {
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .containerlinksNav {
+        right: 10px;
+        top: 50px;
+        width: 80%;
+    }
+
+    .columnacursos {
+        margin-top: 2rem;
+    }
+}
+
+/*FIN RESPONSIVE*/
+
+
+.hero {
+    text-align: center;
+    color: #fff;
+    margin-top: 10rem;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+}
+
+footer {
+    background-color: #000;
+    padding-bottom: 2rem;
+}
+
+footer nav ul li {
+    font-family: sans-serif;
+}
+
+/* Main - blog*/
+.blog {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.blog article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.entrada1 h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    padding: 0 0 1.5rem 0;
+}
+
+.entrada1 h3 {
+    font-size: 1.75rem;
+    margin-bottom: 0.7rem;
+    padding-top: 0.8rem;
+}
+
+.entrada1 p {
+    font-family: sans-serif;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 100;
+}
+
+.entrada1 button {
+    margin-top: 1rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 1.1rem 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.entrada1 button:hover {
+    background-color: #333;
+}
+
+/*Columna cursos y talleres*/
+.columnacursos h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.curso {
+    margin-bottom: 2rem;
+}
+
+.curso h4 {
+    margin-bottom: 0.3rem;
+}
+
+.curso p {
+    margin: 0.2rem 0;
+}
+
+.curso button {
+    background-color: #784d3c;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    padding: 1.1rem 2rem;
+}
+
+.curso button:hover {
+    background-color: #896151;
+}
+
+.entrada1 {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.entrada1:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.curso {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.curso:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/*Smoot scrolling... cuando tengo un ID, y hago click en el link, baja despacio*/
+html {
+    scroll-behavior: smooth;
+}
+
+/*modo oscuro*/
+
+body {
+    background-color: #fff;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+    background-color: #1e1e1e;
+}
+
+#toggleTema {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1002;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+
+
+/* En tu CSS ...personalizar galería
+.lightboxOverlay {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+O cambia el estilo del texto del título:
+
+css
+Copiar
+Editar
+.lightbox .lb-caption {
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 16px;
+}*/
+
+
+/*carga loader*/
+#preloader {
+    background: #fff;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid #ccc;
+    border-top: 5px solid #784d3c;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ANIMACIÓN DE CARGA */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #4b2e2b;
+    /* Color cálido oscuro tipo café */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.spinner {
+    border: 5px solid #fff;
+    border-top: 5px solid #d4a373;
+    /* color caramelo claro */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    margin-top: 1rem;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#contacto {
+    height: 400px;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.mapa-contenedor {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.mapa {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*¿Cómo hacer imágenes responsive?
+✅ Opción 1: con width: 100% y height: auto
+img {
+  width: 100%;
+  height: auto;
+}
+  ¿Puedo hacer tamaños de letra responsive?
+✅ ¡Sí! Usas @media para cambiar font-size según el tamaño de pantalla:
+css
+Copiar
+Editar
+/* Estilo general (PC) 
+h1 {
+  font-size: 36px;
+}
+  ¿Uso max-width o min-width?
+Quiero aplicar estilos a...	Uso
+Pantallas pequeñas (celular, tablet)	✅ max-width
+Pantallas grandes (laptop, escritorio)	✅ min-width
+
+/* Para celulares 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+
+/*☕ BlogDeCafé
+Bienvenida/o a BlogDeCafé, una página web responsiva creada con HTML y CSS puro, diseñada para compartir artículos, cursos y experiencias sobre el fascinante mundo del café.
+Vista en escritorio - puedes añadir tu propia captura de pantalla aquí
+
+📲 ¿Cómo ver el sitio?
+Clona o descarga este repositorio.
+
+Abre el archivo index.html con tu navegador favorito (Chrome, Firefox, Edge…).
+
+¡Disfruta del contenido y explora el mundo del café!
+
+
+
+🛠️ Tecnologías utilizadas
+HTML5
+
+CSS3
+
+Responsive Design con Media Queries
+
+Modo Oscuro 🌙
+
+Menú Hamburguesa 🍔
+
+Animaciones con @keyframes
+
+Loader de carga ⏳
+
+OpenStreetMap con Leaflet para mostrar ubicación 🗺️
+
+
+
+
+🧩 Funcionalidades
+📰 Sección de blog con artículos
+
+🎓 Columna de cursos y talleres
+
+🌍 Mapa de ubicación con Leaflet.js
+
+🌙 Modo claro/oscuro con botón flotante
+
+📱 Responsive en móvil, tablet y escritorio
+
+🔄 Smooth scroll para una navegación suave
+🖼️ Capturas de pantalla
+Escritorio
+
+Tablet
+
+Móvil
+
+⚠️ Reemplaza estos screenshots con los tuyos en la carpeta /assets/img.
+
+
+
+
+🌍 Créditos
+Imágenes de uso libre tomadas de Unsplash
+
+Mapa con Leaflet.js
+
+Inspiración de estilo: YouVersion, páginas de café y blogs personales
+
+Asegúrate de explicar:
+
+Cómo está estructurado tu HTML.
+
+Cómo funciona el menú responsive.
+
+Qué hacen las media queries.
+
+Cómo hiciste el mapa (si usas Leaflet, necesitas <link> y <script>).
+
+Cómo activas el modo oscuro.
+
+Cómo usas hover, transition, y @keyframes.

@@ -1,0 +1,460 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'NORTHDEN';
+    src: url(./assets/fonts/NORTHDEN.otf);
+}
+
+
+body {
+    position: relative;
+    background-image: url(./assets/img/textura.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
+    z-index: -3;
+    font-family: 'NORTHDEN';
+    font-weight: 100;
+    letter-spacing: 0.3rem;
+
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000051;
+    z-index: -2;
+}
+
+h1 {
+    position: absolute;
+    left: 28%;
+    top: 8%;
+    font-size: 130px;
+    color: #892be2;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+h1:hover {
+    color: #2af44c;
+    transform: scale(1.1);
+}
+
+/* NAVIGATION */
+.container_nav {
+    background-color: #892be298;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 150px;
+    padding-top: 2rem;
+    z-index: 10;
+}
+
+.container_nav ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: left;
+    gap: 2rem;
+
+}
+
+.container_nav ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.container_nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    max-width: 100;
+    letter-spacing: 0.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.container_nav ul li a:hover {
+    color: #2af44c;
+    transform: scale(1.1);
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #2af44c, 0 0 10px #2af44c;
+    }
+
+    50% {
+        text-shadow: 0 0 40px #2af44c, 0 0 50px #2af44c;
+    }
+
+    100% {
+        text-shadow: 0 0 5px #2af44c, 0 0 10px #2af44c;
+    }
+}
+
+.glow {
+    color: #fff700;
+    animation: glow 2s infinite;
+}
+
+
+/* PROFILE IMAGES */
+.container_profileimg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.img_profile1 {
+    object-fit: cover;
+    width: 500px;
+    height: auto;
+    left: 0;
+}
+
+.img_profile2 {
+    object-fit: cover;
+    width: 500px;
+    height: auto;
+    z-index: 1000;
+}
+
+.letters,
+.letters2 {
+    position: absolute;
+    z-index: -1;
+}
+
+.letters {
+    max-width: 50%;
+    top: 388px;
+    left: 100px;
+}
+
+.letters2 {
+    max-width: 47%;
+    top: 115px;
+    right: -127px;
+    transform: rotate(-90deg);
+}
+
+.scrolling-text {
+    position: fixed;
+    top: 30%;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #892be2c9;
+    color: #2af44c;
+    z-index: 999;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-family: 'NORTHDEN', sans-serif;
+}
+
+.scrolling-text span {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    font-weight: bold;
+    font-size: 80px;
+    letter-spacing: 0.3rem;
+    animation: scrollText 12s linear infinite;
+}
+
+/* Animación para mover el texto de derecha a izquierda */
+@keyframes scrollText {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .container_nav {
+        width: 60px;
+    }
+
+    .container_profileimg {
+        flex-direction: column;
+        gap: 1rem;
+        padding-left: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .img_profile {
+        max-width: 90%;
+    }
+
+    .letters,
+    .letters2 {
+        display: none;
+    }
+
+    .scrolling-text {
+        margin-left: 60px;
+    }
+
+    /* MÓVIL (hasta 480px)    */
+
+    @media (max-width: 480px) {
+        .container_nav {
+            width: 60px;
+        }
+
+        .container_profileimg {
+            flex-direction: column;
+            align-items: center;
+            margin-left: 0;
+            padding-left: 0;
+            width: 100%;
+            gap: 1rem;
+        }
+
+        .img_profile {
+            max-width: 100%;
+        }
+
+        .letters,
+        .letters2 {
+            display: none;
+        }
+
+        .scrolling-text {
+            margin-left: 0;
+            padding-left: 0;
+            text-align: center;
+        }
+    }
+
+
+    /*  TABLET (481px - 768px) */
+
+    @media (min-width: 481px) and (max-width: 768px) {
+        .container_nav {
+            width: 70px;
+        }
+
+        .container_profileimg {
+            flex-direction: column;
+            align-items: center;
+            margin-left: 0;
+            padding-left: 0;
+            width: 100%;
+            gap: 1.5rem;
+        }
+
+        .img_profile {
+            max-width: 90%;
+        }
+
+        .letters,
+        .letters2 {
+            display: none;
+        }
+
+        .scrolling-text {
+            margin-left: 0;
+            text-align: center;
+        }
+    }
+
+}
+
+
+.about-section,
+.projects-section,
+.contact-section {
+    padding: 4rem 2rem;
+    margin-left: 160px;
+    /* para dejar espacio al nav fijo */
+    color: white;
+    background-color: #4c25a4;
+    /* morado suave */
+}
+
+.about-section h2,
+.projects-section h2,
+.contact-section h2 {
+    font-size: 2.5rem;
+    color: #2af44c;
+    margin-bottom: 1rem;
+}
+
+.about-section p,
+.contact-section p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* GRID PROYECTOS */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* TARJETAS FLIP */
+.card {
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 2px solid #2af44c;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-back {
+    background-color: #892be2;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    text-align: center;
+}
+
+/* CONTACTO */
+.social-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: #fff700;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #2af44c;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 1rem;
+    margin-left: 150px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .about-section,
+    .projects-section,
+    .contact-section,
+    footer {
+        margin-left: 60px;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .card-inner {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .about-section,
+    .projects-section,
+    .contact-section,
+    footer {
+        margin-left: 0;
+        padding: 2rem 1rem;
+    }
+
+    .card-inner {
+        height: 200px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+.social-links i {
+    color: #b05cff;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links i:hover {
+    color: #2af44c;
+    transform: scale(1.2);
+}

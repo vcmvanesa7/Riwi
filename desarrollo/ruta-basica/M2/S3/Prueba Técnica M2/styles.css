@@ -1,0 +1,473 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Playfair Display';
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+    background-color: #fef6e4;
+    font-size: 16px;
+    font-family: 'Montserrat';
+    padding-left: 10rem;
+    padding-right: 10rem;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+nav {
+    padding-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+header nav div h2 {
+    color: #1b2e61;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.links {
+    color: #1b2e61;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.container_links {
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.container_links :hover {
+    color: #f384ac;
+}
+
+.links span {
+    font-size: 1.4rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
+}
+
+.img-profile {
+    border-radius: 50%;
+}
+
+.hero {
+    padding-top: 8rem;
+}
+
+.hero h4 {
+    font-size: 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #f384ac;
+}
+
+.hero {
+    max-width: 100%;
+    text-align: left;
+    margin-top: 6rem;
+
+}
+
+.hero h1 {
+    color: #1b2e61;
+    font-size: 7rem;
+}
+
+.hero p {
+    padding-top: 4rem;
+    color: #1b2e61;
+    font-size: 3rem;
+    font-weight: 200;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.about-me {
+    margin-top: 12rem;
+    width: 100vw;
+    background-color: #f384ac;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+}
+
+.about-text {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left;
+    padding: 5rem 0 5rem 0;
+}
+
+.about-text h2 {
+    color: #fef6e4;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.about-text h2 :hover {
+    color: #f384ac;
+}
+
+.about-text p {
+    color: #fef6e4;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: justify;
+    font-family: 'montserrat';
+}
+
+
+/* GRID PROYECTOS */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.projects-section h2 {
+    font-size: 2rem;
+    color: #f384ac;
+}
+
+.card-back p a {
+    color: #fbf3e3;
+}
+
+/* TARJETAS FLIP */
+.card {
+    perspective: 1000px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 0.07rem solid #f384ac;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-back {
+    background-color: #1b2e61;
+    color: #fbf3e3;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    width: 100vw;
+    background-color: #fef6e4;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+}
+
+footer div p {
+    font-size: 1.5rem;
+    font-family: 'montserrat';
+}
+
+.footer-redes img {
+    gap: 2rem;
+}
+
+.contact {
+    text-align: center;
+
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #1b2e61;
+    width: 60%;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+.contact h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-form label {
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.contact-form button {
+    background-color: #f384ac;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #1b2e61;
+}
+
+/* Contact box */
+
+.contact {
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    color: white;
+}
+
+.contact h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact li {
+    margin-bottom: 10px;
+    color: #ffcc70;
+}
+
+
+
+/*carga loader*/
+#preloader {
+    background: #fff;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid #ccc;
+    border-top: 5px solid #784d3c;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ANIMACIÓN DE CARGA */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1b2e61;
+    /* Color cálido oscuro tipo café */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.spinner {
+    border: 5px solid #fff;
+    border-top: 5px solid #d4a373;
+    /* color caramelo claro */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    margin-top: 1rem;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {}
+
+
+
+/*Teléfonos pequeños (0–480px) */
+@media (max-width: 480px) {
+
+    .projects-section,
+    .contact-section,
+    footer,
+    header,
+    .about-me {
+        margin-left: 0;
+        padding: 2rem 1rem;
+
+    }
+
+    .about-me {
+        font-size: 20px;
+        align-content: center;
+        padding-right: 2rem;
+    }
+
+    .card-inner {
+        height: 200px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
+
+
+/* Teléfonos grandes y tablets pequeñas (481-768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    body {
+
+        .projects-section,
+        .contact-section,
+        footer,
+        header,
+        .about-me {
+            margin-left: 0;
+            padding: 20px 20px;
+
+        }
+
+        .about-me p {
+            font-size: 30px;
+        }
+
+        .card-inner {
+            height: 200px;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+        }
+    }
+}
+
+
+
+
+/* Tablets y laptops pequeñas (769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        .hero h1 {
+            font-size: 40px;
+        }
+
+        body {
+
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+
+        .about-section,
+        .projects-section,
+        .contact-section,
+        footer,
+        header,
+        .hero {
+            margin-left: auto;
+        }
+
+        .portfolio-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        .card-inner {
+            height: 250px;
+        }
+    }
+}

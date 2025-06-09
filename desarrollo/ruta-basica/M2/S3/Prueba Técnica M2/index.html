@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Permanent+Marker&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!--Animación de Carga (Pantalla de Loading)-->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- ANIMACIÓN DE CARGA -->
+    <div id="loader">
+        <div class="spinner"></div>
+        <p class="loading-text">Cargando Portfolio...</p>
+    </div>
+    <header>
+        <nav>
+            <div>
+                <img class="img-profile" src="./assets/img/vane.jpeg" width="70px" alt="Foto perfil Vanesa Carrillo">
+                <h2>Vanesa Carrillo</h2>
+            </div>
+            <div class="container_links">
+                <a class="links" href="#know me"><span>01</span> know me</a>
+                <a class="links" href="portofolio.html"><span>02</span> Portofolio</a>
+                <a class="links" href="concat.html"><span>03</span> Contact me</a>
+                <div>
+                    🌙
+                </div>
+            </div>
+        </nav>
+
+        <article class="hero">
+            <h4>HELLO! MY NAME IS VANESA CARRILLO</h4>
+            <h1>I make web sides.</h1>
+            <p>I’m a front-end developer Passionate about design, technology, and visual expression. Welcome to my
+                world!.</p>
+        </article>
+    </header>
+    <main>
+        <section id="know me" class="about-me">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2>About me</h2>
+                    <p>I am a passionate creative with a background in cinematography and a growing skill set in web
+                        development. Although I am not a professional graphic designer, I truly enjoy working on
+                        aesthetic projects and exploring the world of visual design.</p>
+                    <p>I am currently learning and developing my portfolio as a front-end developer, while
+                        maintaining my
+                        passion for visual storytelling. I'm excited to collaborate on meaningful projects where I
+                        can combine design, programming, and purpose to create experiences that connect with people.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+
+    <footer>
+        <div>
+            <p>Vanesa Carrillo 2025.</p>
+        </div>
+        <div class="footer-redes">
+            <a href="https://www.instagram.com/"><img src="./assets/img/instagram.png" width="80px"
+                    alt="Logo instagram"></a>
+            <a href="https://www.linkedin.com/login/es?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"><img
+                    src="./assets/img/linkedin.png" width="80px" alt="Logo linkedin"></a>
+            <a href="https://github.com/login"><img src="./assets/img/github.png" width="80px" alt="Logo github"></a>
+        </div>
+    </footer>
+    <!--(Pantalla de Loading.. solo se ve al recargar la página sin caché... Ctrl + Shift + R)-->
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('preloader');
+            loader.style.display = 'none';
+        });
+    </script>
+    <!--( animación de carga personalizada)-->
+    <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("loader");
+            loader.style.opacity = 0;
+            setTimeout(() => {
+                loader.style.display = "none";
+            }, 500); // espera la transición antes de ocultar
+        });
+    </script>
+</body>
+
+</html>

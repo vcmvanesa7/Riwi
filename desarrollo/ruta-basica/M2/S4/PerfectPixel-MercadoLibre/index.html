@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Libre Colombia - Clon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/script.js">
+</head>
+
+<body>
+
+    <!-- Contenedor principal del header -->
+    <header class="contenedor-header">
+
+        <!-- Caja superior del header -->
+        <div class="caja-superior">
+
+            <!-- Sección izquierda: logo -->
+            <div class="seccion-logo">
+                <img src="logo-mercadolibre.png" alt="Logo MercadoLibre">
+            </div>
+
+            <!-- Sección central: barra de búsqueda -->
+            <div class="seccion-busqueda">
+                <input type="text" placeholder="Buscar productos, marcas y más" class="barra-busqueda">
+                <button class="boton-buscar">🔍</button>
+            </div>
+
+            <!-- Sección derecha: imagen de envío gratis -->
+            <div class="seccion-envio-gratis">
+                <img src="envio-gratis.png" alt="Envío gratis primera compra">
+            </div>
+
+        </div>
+
+        <!-- Menú hamburguesa para responsive -->
+        <div class="menu-hamburguesa" id="menu-toggle">
+            ☰
+        </div>
+
+        <!-- Caja inferior del header -->
+        <div class="caja-inferior" id="menu-principal">
+
+            <!-- Sección izquierda: ubicación -->
+            <div class="seccion-ubicacion">
+                <span class="icono-ubicacion">📍</span>
+                <span>Ingresa tu ubicación</span>
+            </div>
+
+            <nav class="menu-navegacion">
+                <ul>
+                    <li class="menu-categorias">
+                        <a href="#">Categorías ▾</a>
+                        <ul class="submenu">
+                            <li><a href="#">Tecnología</a></li>
+                            <li><a href="#">Hogar y muebles</a></li>
+                            <li><a href="#">Deportes</a></li>
+                            <li><a href="#">Moda</a></li>
+                            <li><a href="#">Automóviles</a></li>
+                        </ul>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Cupones</a></li>
+                    <li><a href="#">Vender</a></li>
+                    <li><a href="#">Ayuda / PQR</a></li>
+                </ul>
+            </nav>
+
+
+            <!-- Sección derecha: cuenta y carrito -->
+            <div class="seccion-cuenta-carrito">
+                <a href="#">Crea tu cuenta</a>
+                <a href="#">Ingresa</a>
+                <a href="#">Mis compras</a>
+                <a href="#" class="icono-carrito">🛒</a>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- HERO PRINCIPAL (Slider de imágenes) -->
+    <section class="contenedor-hero">
+        <div class="slider">
+            <div class="slides">
+                <img src="banner1.jpg" alt="Banner 1">
+                <img src="banner2.jpg" alt="Banner 2">
+                <img src="banner3.jpg" alt="Banner 3">
+            </div>
+            <button class="anterior">❮</button>
+            <button class="siguiente">❯</button>
+        </div>
+    </section>
+
+    <!-- TARGETS INFERIORES -->
+    <section class="contenedor-targets">
+        <div class="target"><img src="target1.png" alt="">
+            <p>Electrodomésticos</p>
+        </div>
+        <div class="target"><img src="target2.png" alt="">
+            <p>Moda</p>
+        </div>
+        <div class="target"><img src="target3.png" alt="">
+            <p>Celulares</p>
+        </div>
+        <div class="target"><img src="target4.png" alt="">
+            <p>Hogar</p>
+        </div>
+        <div class="target"><img src="target5.png" alt="">
+            <p>Supermercado</p>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

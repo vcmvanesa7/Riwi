@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo Musical – Tienda de Instrumentos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>🎶 Tienda Musical</h1>
+      <ul class="nav-links">
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#agregar">Agregar / Editar</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- CATÁLOGO -->
+    <section id="catalogo" class="catalogo-section">
+      <h2>Catálogo de Productos</h2>
+      <div class="filtro">
+        <label for="filtroCategoria">Filtrar por categoría:</label>
+        <select id="filtroCategoria">
+          <option value="todos">Todos</option>
+          <option value="cuerda">Cuerda</option>
+          <option value="percusion">Percusión</option>
+          <option value="teclas">Teclas</option>
+        </select>
+      </div>
+      <div id="catalogoProductos" class="productos-grid"></div>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section id="agregar" class="form-section">
+      <h2>Agregar / Editar Producto</h2>
+      <form id="formularioProducto">
+        <input type="number" id="id" placeholder="ID del producto" required>
+        <input type="text" id="nombre" placeholder="Nombre del producto" required>
+        <input type="number" id="precio" placeholder="Precio ($COP)" required>
+        <input type="number" id="cantidad" placeholder="Cantidad disponible" required>
+        <input type="date" id="fecha" required>
+        <textarea id="descripcion" placeholder="Descripción del producto" rows="2"></textarea>
+        <select id="categoria">
+          <option value="cuerda">Cuerda</option>
+          <option value="percusion">Percusión</option>
+          <option value="teclas">Teclas</option>
+        </select>
+        <input type="url" id="imagen" placeholder="URL de la imagen" required>
+        <button type="submit">Guardar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tienda Musical. Todos los derechos reservados. Diseñado por Vane Codernn 💜</p>
+  </footer>
+
+  <script src="gestion_datos.js"></script>
+</body>
+</html>

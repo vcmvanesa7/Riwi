@@ -1,65 +1,118 @@
+<!-- index.html actualizado y sincronizado con el script.js -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Catálogo Musical – Tienda de Instrumentos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario Tienda Musical</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-  <header>
-    <nav>
-      <h1>🎶 Tienda Musical</h1>
-      <ul class="nav-links">
-        <li><a href="#catalogo">Catálogo</a></li>
-        <li><a href="#agregar">Agregar / Editar</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
+  <!-- HEADER + NAVBAR -->
+  <header id="main-header">
+    <h1 class="site-title">¡Bienvenido al Sistema de Control de Inventario!</h1>
+    <nav id="navbar" class="navbar">
+      <div>
+        <h2 class="nombre_Tienda">Allegro</h2>
+        <h4>Tienda de Música</h4>
+      </div>
+      <a href="#form-section">Añadir</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#editar-producto">Editar Producto</a>
     </nav>
   </header>
 
-  <main>
-    <!-- CATÁLOGO -->
-    <section id="catalogo" class="catalogo-section">
-      <h2>Catálogo de Productos</h2>
-      <div class="filtro">
-        <label for="filtroCategoria">Filtrar por categoría:</label>
-        <select id="filtroCategoria">
-          <option value="todos">Todos</option>
-          <option value="cuerda">Cuerda</option>
-          <option value="percusion">Percusión</option>
-          <option value="teclas">Teclas</option>
-        </select>
-      </div>
-      <div id="catalogoProductos" class="productos-grid"></div>
-    </section>
+  <!-- SECCIÓN PRINCIPAL -->
+  <main class="main-container">
+    <!-- FORMULARIO DE INVENTARIO -->
+    <section id="form-section">
+      <form id="inventory-form">
+        <div id="alert-success" class="alert">✅ Producto agregado con éxito</div>
 
-    <!-- FORMULARIO -->
-    <section id="agregar" class="form-section">
-      <h2>Agregar / Editar Producto</h2>
-      <form id="formularioProducto">
-        <input type="number" id="id" placeholder="ID del producto" required>
-        <input type="text" id="nombre" placeholder="Nombre del producto" required>
-        <input type="number" id="precio" placeholder="Precio ($COP)" required>
-        <input type="number" id="cantidad" placeholder="Cantidad disponible" required>
-        <input type="date" id="fecha" required>
-        <textarea id="descripcion" placeholder="Descripción del producto" rows="2"></textarea>
-        <select id="categoria">
-          <option value="cuerda">Cuerda</option>
-          <option value="percusion">Percusión</option>
-          <option value="teclas">Teclas</option>
+        <label for="idProducto">ID</label>
+        <input id="idProducto" class="form-control" type="text" readonly />
+
+        <label for="nombre">Nombre</label>
+        <input id="nombre" class="form-control" required />
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria" class="form-select" required>
+          <option value="">-- Selecciona --</option>
+          <option>Instrumentos de Viento</option>
+          <option>Instrumentos de Percusión</option>
+          <option>Instrumentos de Cuerda</option>
+          <option>Instrumentos Eléctricos</option>
         </select>
-        <input type="url" id="imagen" placeholder="URL de la imagen" required>
-        <button type="submit">Guardar</button>
+
+        <label for="precio">Precio</label>
+        <input id="precio" class="form-control" type="number" required />
+
+        <label for="cantidad">Cantidad disponible</label>
+        <input id="cantidad" class="form-control" type="number" required />
+
+        <label for="fecha">Fecha de entrada</label>
+        <input id="fecha" class="form-control" type="date" required />
+
+        <fieldset>
+          <legend>Estado</legend>
+          <label><input type="radio" name="estado" value="Nuevo" checked /> Nuevo</label>
+          <label><input type="radio" name="estado" value="Usado" /> Usado</label>
+        </fieldset>
+
+        <label for="descripcion">Descripción (opcional)</label>
+        <textarea id="descripcion" class="form-control"></textarea>
+
+        <label for="imagenURL">URL de la imagen</label>
+        <input id="imagenURL" class="form-control" type="url" required />
+
+        <button id="btn-add" class="btn btn-primary" type="submit">Agregar</button>
       </form>
     </section>
+
+    <!-- LISTADO DE Últimos productos -->
+    <aside id="ultimos-productos">
+      <h3>Últimos productos agregados</h3>
+      <ul id="lista-ultimos"></ul>
+    </aside>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Tienda Musical. Todos los derechos reservados. Diseñado por Vane Codernn 💜</p>
+  <!-- CATÁLOGO -->
+  <section id="catalogo">
+    <h2>Catálogo de Productos</h2>
+    <select id="filtro-catalogo">
+      <option value="">Todos</option>
+      <option>Instrumentos de Viento</option>
+      <option>Instrumentos de Percusión</option>
+      <option>Instrumentos de Cuerda</option>
+      <option>Instrumentos Eléctricos</option>
+    </select>
+    <div id="product-list" class="grid-catalogo"></div>
+    <p id="total-price">Total: $0</p>
+  </section>
+
+  <!-- EDITAR PRODUCTO -->
+  <section id="editar-producto">
+    <h2>Editar/Actualizar Inventario</h2>
+    <input id="filtro-editar" class="form-control" placeholder="Filtrar por ID o Categoría" />
+    <ul id="editar-lista"></ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="main-footer">
+    <p>&copy; 2025 Tienda Musical. Todos los derechos reservados.</p>
   </footer>
 
-  <script src="gestion_datos.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>

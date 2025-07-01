@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+.boton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 5rem;
+    font-family: 'Montserrat';
+    color: rgb(8, 189, 174);
+}
+
+h2 {
+    margin-top: 4rem;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Montserrat';
+    color: #7e1bff;
+}
+
+.boton p {
+    color: #08bdae;
+    font-size: 2em;
+}
+
+.botones {
+    height: 160PX;
+    width: 90%;
+    padding: 12px 24px;
+    margin: 1rem 0 1rem 0;
+    font-size: 16px;
+    background-image: url(./assets/img/5469972beb848ff6d4146a8b50fe1cb6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px #00000033;
+}
+
+button:hover {
+    background-color: #732d91;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #5e2a82;
+    transform: scale(0.98);
+}
+
+.juego {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.juego button {
+    width: 10rem;
+}
+
+#resultadoJuego {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Montserrat';
+    color: #08bdae;
+    margin-top: 0.5rem;
+}
+
+.containerJuego {
+    margin-top: 6rem;
+    width: 100%;
+    height: 700px;
+    background-color: #f0f0f0;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.articuloJuego {
+    padding-top: 0.2rem;
+}
+
+#jugadaUsuario {
+    margin-top: 3rem;
+}
+
+#jugadaUsuario,
+#jugadaComputadora {
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    color: #7e1bff;
+}
+
+#marcadores {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerMarcadores {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.containerMarcadores p {
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    color: #7e1bff;
+}
+
+#marcadores button {
+    height: 30PX;
+    width: 10%;
+    padding: 0.3rem;
+    font-size: 12px;
+    background-color: #0a9185;
+    background-size: cover;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px #00000033;
+}
+
+#resultadoJuego {
+    transition: all 0.3s ease;
+}
+
+#resultadoJuego:hover {
+    transform: scale(1.05);
+    color: #8e44ad;
+}
+
+#marcadores {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#reiniciar {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+#reiniciar:hover {
+    background-color: #d68910;
+    transform: scale(1.05);
+}
+
+#esperandoTurno {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+    color: #3498db;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    color: #7e1bff81;
+}

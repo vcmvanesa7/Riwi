@@ -23,12 +23,13 @@
     <h1 class="site-title">¡Bienvenido al Sistema de Control de Inventario!</h1>
     <nav id="navbar" class="navbar">
       <div>
-        <h2 class="nombre_Tienda">Allegro</h2>
+        <h2 class="nombre_Tienda">ALLEGRO</h2>
         <h4>Tienda de Música</h4>
       </div>
-      <a href="#form-section">Añadir</a>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#editar-producto">Editar Producto</a>
+      <a href="index.html" onclick="navegarConTransicion('index.html')">Añadir</a>
+      <a href="catálogo.html" onclick="navegarConTransicion('catálogo.html')">Catálogo</a>
+      <a href="actualizar.html" onclick="navegarConTransicion('actualizar.html')">Actualizar <br>Inventario</a>
+
     </nav>
   </header>
 
@@ -36,8 +37,8 @@
   <main class="main-container">
     <!-- FORMULARIO DE INVENTARIO -->
     <section id="form-section">
+      <h3>Anadir producto</h3><br>
       <form id="inventory-form">
-        <div id="alert-success" class="alert">✅ Producto agregado con éxito</div>
 
         <label for="idProducto">ID</label>
         <input id="idProducto" class="form-control" type="text" readonly />
@@ -74,8 +75,9 @@
 
         <label for="imagenURL">URL de la imagen</label>
         <input id="imagenURL" class="form-control" type="url" required />
-
         <button id="btn-add" class="btn btn-primary" type="submit">Agregar</button>
+        <div id="alert-success" class="alert">Producto agregado con éxito</div>
+        <br><br><br>
       </form>
     </section>
 
@@ -86,31 +88,33 @@
     </aside>
   </main>
 
-  <!-- CATÁLOGO -->
-  <section id="catalogo">
-    <h2>Catálogo de Productos</h2>
-    <select id="filtro-catalogo">
-      <option value="">Todos</option>
-      <option>Instrumentos de Viento</option>
-      <option>Instrumentos de Percusión</option>
-      <option>Instrumentos de Cuerda</option>
-      <option>Instrumentos Eléctricos</option>
-    </select>
-    <div id="product-list" class="grid-catalogo"></div>
-    <p id="total-price">Total: $0</p>
-  </section>
-
-  <!-- EDITAR PRODUCTO -->
-  <section id="editar-producto">
-    <h2>Editar/Actualizar Inventario</h2>
-    <input id="filtro-editar" class="form-control" placeholder="Filtrar por ID o Categoría" />
-    <ul id="editar-lista"></ul>
-  </section>
-
   <!-- FOOTER -->
   <footer id="main-footer">
-    <p>&copy; 2025 Tienda Musical. Todos los derechos reservados.</p>
+    <p>&copy;2025 Desarrollado por Vanesa Carrillo</p>
   </footer>
+
+
+  <!--navegarConTransicion-->
+  <script>
+    function navegarConTransicion(url) {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 400);
+    }
+
+    // Detecta la página actual y aplica "active" al enlace correspondiente (soporte para tildes)
+    const path = decodeURIComponent(window.location.pathname);
+    document.querySelectorAll('#navbar a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (path.includes(href)) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  </script>
+
 
   <script src="script.js"></script>
 </body>

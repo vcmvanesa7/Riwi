@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis primeros pasos con JS</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&family=Monoton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h1>¡Explorando el mundo JavaScript! <br> By Vane💜</h1>
+    <!-- Boton que cambia el texto de un párrafo al hacer clic. -->
+    <section class="boton">
+        <h2>Texto diferente al hacer click</h2>
+        <button id="boton1" class="botones">Haz clic aquí</button>
+        <p id="resultado1"></p>
+    </section>
+
+    <!-- Jueguito de Piedra Papel y Tijera -->
+    <div class="containerJuego">
+        <article class="articuloJuego">
+            <h2>✊✋✌️ Piedra, Papel o Tijera</h2>
+            <p id="jugadaUsuario"></p>
+            <p id="resultadoJuego">Haz tu jugada 😉</p>
+            <p id="jugadaComputadora"></p>
+            <p id="esperandoTurno"></p>
+        </article>
+        <section class="juego">
+            <button id="piedra" class="botones">🪨Piedra</button>
+            <button id="papel" class="botones">📄Papel</button>
+            <button id="tijera" class="botones">✂️Tijera</button>
+        </section>
+        <div id="marcadores">
+            <div class="containerMarcadores">
+                <p>🏆 Victorias: <span id="victorias">0</span></p>
+                <p>😢 Derrotas: <span id="derrotas">0</span></p>
+                <p>🤝 Empates: <span id="empates">0</span></p>
+            </div>
+            <button id="reiniciar">🔄 Reiniciar Juego</button>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<script src="./script.js"></script>

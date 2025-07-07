@@ -122,6 +122,18 @@ function loadUserData() {
     startSadnessTimer();
 }
 
+// ✅ Mostrar datos del Local Storage en consola
+function showSavedUserData() {
+    const name = localStorage.getItem("ownerName");
+    const age = localStorage.getItem("ownerAge");
+    const plant = localStorage.getItem("plantName");
+
+    console.log("📦 Owner Name:", name);
+    console.log("📦 Owner Age:", age);
+    console.log("📦 Plant Name:", plant);
+}
+
+
 // -----  GROWTH STAGE UPDATER (Based on interaction count)
 function updateStage(count) {
     let stageIndex = Math.floor(count / 3);
@@ -273,6 +285,15 @@ if (form) {
         localStorage.setItem("interactions", 0);
         localStorage.setItem("unlockedBadges", JSON.stringify([]));
 
+        // Mostrar datos inmediatamente en consola (opcional)
+        console.log("👤 Owner Name:", ownerName);
+        console.log("🎂 Owner Age:", ownerAge);
+        console.log("🪴 Plant Name:", plantName);
+
+        // También actualiza la vista en pantalla
+        loadUserData();
+
+        // Pantallas
         welcomeScreen.style.display = "none";
         loadingScreen.style.display = "block";
 
@@ -297,6 +318,8 @@ window.addEventListener("DOMContentLoaded", () => {  //window.onload
         mainScreen.style.display = "block";
         loadUserData();
     }
+    // Llamar la función para mostrar datos en consola
+    showSavedUserData();
 });
 
 // -----  EVENT LISTENERS FOR CARE BUTTONS

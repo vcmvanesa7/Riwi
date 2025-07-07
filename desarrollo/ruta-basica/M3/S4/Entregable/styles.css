@@ -6,14 +6,16 @@
 }
 
 body {
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(to bottom right, #d0f0c0, #f9fbe7);
+    background-image: url(./assets/img/Background2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #2e4d34;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    font-family: Open Sans;
 }
 
 /* CONTENEDORES GENERALES */
@@ -52,11 +54,12 @@ main,
 
 /* PLANT CONTAINER: IMAGEN DERECHA + ANIMACIÓN */
 #plant-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-width: 200px;
     animation: float 3s ease-in-out infinite;
+}
+h1 {
+    font-weight: 800;
+    color: #b457ff;
 }
 
 @keyframes float {
@@ -73,7 +76,7 @@ main,
     }
 }
 
-#plant-shadow {
+#plant-shadow, intro-image {
     width: 110px;
     height: 25px;
     background: radial-gradient(ellipse at center, #0000008c, transparent);
@@ -125,10 +128,10 @@ input {
 /* BOTONES */
 button,
 .btn-start {
-    background-color: #88c399;
+    background-color: #b457ff;
     color: #fff;
     border: none;
-    padding: 0.75rem;
+    padding: 0.5rem;
     border-radius: 0.75rem;
     cursor: pointer;
     font-weight: bold;
@@ -173,6 +176,11 @@ button:hover,
     }
 }
 
+.container-care-plant {
+    display: flex;
+    color: #fff;
+}
+
 /* BOTONES DE CUIDADO */
 #care-actions {
     display: flex;
@@ -182,8 +190,8 @@ button:hover,
 }
 
 #care-actions button {
-    background-color: #b2dfdb;
-    color: #00332a;
+    background-color: #b457ff;
+    color: #ffffff;
 }
 
 /* MENSAJE DE CUIDADO */
@@ -202,12 +210,15 @@ button:hover,
 
 /* INTRO PAGE */
 .intro-container {
-    max-width: 700px;
+    max-width: 900px;
     background-color: #ffffffda;
     border-radius: 1.5rem;
     padding: 2rem 3rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    display: flex;
+    flex-direction: row;
+
 }
 
 .intro-slogan {
@@ -216,13 +227,13 @@ button:hover,
 }
 
 .intro-story {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #3c5b44;
     margin-bottom: 1rem;
 }
 
 .intro-image {
-    width: 150px;
+    height: 24rem;
     margin: 1rem auto;
     display: block;
 }
@@ -230,7 +241,9 @@ button:hover,
 .intro-rules ul {
     list-style: none;
     padding: 0;
-    margin-top: 1rem;
+    margin: 1.8rem;
+    font-size: 12px;
+    text-align: start;
 }
 
 .intro-rules li {

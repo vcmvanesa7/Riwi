@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Virtual Plant 🌱</title>
+    <title>Your Virtual Plant </title>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="./assets/img/favicon.ico" />
+   
 </head>
 
 <body>
@@ -37,20 +38,16 @@
     </section>
 
     <!-- Main Interaction Screen -->
+<div class="container-care-plant" >
     <section id="main-screen" style="display: none;">
         <div id="main-layout">
-            <!-- Left side: plant image -->
-            <div id="plant-container">
-                <img id="plant-image" src="assets/img/0.png" alt="Your virtual plant" />
-                <div id="plant-shadow"></div>
-            </div>
-
+            
             <!-- Right side: interaction -->
             <div id="interaction-container">
                 <h2>Hello <span id="user-name"></span> 👋</h2>
                 <p>Age: <span id="user-age"></span> years old</p>
                 <h3>This is your plant: <strong id="plant-name"></strong> 🪴</h3>
-
+                
                 <!-- Care buttons -->
                 <div id="care-actions">
                     <button id="btn-water">💧 Water</button>
@@ -58,33 +55,41 @@
                     <button id="btn-fertilizer">🌿 Fertilize</button>
                     <button id="btn-talk">🗣️ Talk nicely</button>
                 </div>
-
+                
                 <!-- Motivational and educational message -->
                 <div id="care-message"></div>
-
+                
                 <!-- Progress Info -->
                 <div id="progress">
                     <p>Interactions: <span id="interaction-count">0</span></p>
                     <p>Current stage: <span id="current-stage">Baby 🌱</span></p>
-
+                    
                     <!-- Barra de progreso -->
                     <div class="progress-bar-container">
                         <div id="progress-bar" class="progress-bar-fill"></div>
                     </div>
                 </div>
-
-
-                <!-- Badge collection section -->
-                <div id="badge-section">
-                    <h4>🏅 Achievements Unlocked:</h4>
-                    <ul id="badge-list"></ul> <!-- Aquí se insertan dinámicamente las insignias con barras -->
-                </div>
-
+                
+                
+                
                 <!-- Reset Button -->
                 <button id="btn-reset">🗑️ Clear data and start again</button>
             </div>
         </div>
+        <!-- Badge collection section -->
+        <div id="badge-section">
+            <h4>🏅 Achievements Unlocked:</h4>
+            <ul id="badge-list"></ul> <!-- Aquí se insertan dinámicamente las insignias con barras -->
+        </div>
     </section>
+
+    <!-- Left side: plant image -->
+    <div id="plant-container">
+        <img id="plant-image" src="assets/img/0.png" alt="Your virtual plant" />
+        <div id="plant-shadow"></div>
+    </div>  
+</div>
+
 
     <!-- Badge Unlock Popup -->
     <div id="badge-popup" class="hidden">

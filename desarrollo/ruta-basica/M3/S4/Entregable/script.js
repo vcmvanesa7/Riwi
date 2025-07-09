@@ -1,8 +1,9 @@
-// ----------------------------
+
 // 🌱 Virtual Plant Care App - JavaScript Logic
 // Author: Vanesa Carrillo
-// Description: This script manages a gamified virtual plant, handling user data, plant growth, interactivity, badges, session tracking and care feedback.
-// ----------------------------
+// Description: This script manages a gamified virtual plant, 
+// handling user data, plant growth, interactivity, badges, session tracking and care feedback.
+
 
 // -----  SCREEN ELEMENTS (HTML sections of the app)
 const welcomeScreen = document.getElementById("welcome-screen");
@@ -23,6 +24,7 @@ const interactionCountDisplay = document.getElementById("interaction-count");
 const currentStageDisplay = document.getElementById("current-stage");
 const plantImage = document.getElementById("plant-image");
 const careMessage = document.getElementById("care-message");
+const scoreDisplay = document.getElementById("score-display");
 
 // -----  INTERACTION BUTTONS (Triggers for plant care actions)
 const waterBtn = document.getElementById("btn-water");
@@ -69,13 +71,31 @@ const messages = {
 // -----  BADGES SYSTEM (Milestones that reward user care)
 const badges = [
     { count: 5, icon: "🥉", text: "Novice Gardener – First steps caring!" },
-    { count: 10, icon: "🥐", text: "Passionate Gardener – Your plant loves you!" },
+    { count: 10, icon: "💚", text: "Passionate Gardener – Your plant loves you!" },
     { count: 15, icon: "🥇", text: "Expert Gardener – You're growing a forest!" },
     { count: 20, icon: "🌟", text: "Master of Growth – Plant master level unlocked!" }
 ];
 
+// -----  SCORE SYSTEM (Points that increase or decrease based on care quality)
+let lastAction = "";
+let actionsSinceFertilizer = 0;
+
+function updateScore(change) {
+    let score = parseInt(localStorage.getItem("score")) || 0;
+    score += change;
+    localStorage.setItem("score", score);
+
+    // Actualiza visualmente el puntaje
+    if (scoreDisplay) {
+        scoreDisplay.textContent = score;
+    }
+
+    console.log(`⭐ Score: ${score}`);
+}
+
+
 // -----  SADNESS STATE TIMER (Triggers sadness if ignored)
-const TIME_TO_SADNESS = 10000; // 30 seconds of inactivity
+const TIME_TO_SADNESS = 10000; // 10 seconds of inactivity
 let sadnessTimeout;
 
 function startSadnessTimer() {
@@ -110,11 +130,17 @@ function loadUserData() {
     const age = localStorage.getItem("ownerAge");
     const plant = localStorage.getItem("plantName");
     const count = parseInt(localStorage.getItem("interactions")) || 0;
+    const score = parseInt(localStorage.getItem("score")) || 0; // 👈 nuevo
 
     userNameDisplay.textContent = name;
     userAgeDisplay.textContent = age;
     plantNameDisplay.textContent = plant;
     interactionCountDisplay.textContent = count;
+
+    // 👇 muestra el score también
+    if (scoreDisplay) {
+        scoreDisplay.textContent = score;
+    }
 
     updateStage(count);
     updateProgressBar(count);
@@ -122,17 +148,19 @@ function loadUserData() {
     startSadnessTimer();
 }
 
-// ✅ Mostrar datos del Local Storage en consola
-function showSavedUserData() {
-    const name = localStorage.getItem("ownerName");
-    const age = localStorage.getItem("ownerAge");
-    const plant = localStorage.getItem("plantName");
 
-    console.log("📦 Owner Name:", name);
-    console.log("📦 Owner Age:", age);
-    console.log("📦 Plant Name:", plant);
+// -----  RANDOM CARE MESSAGE (Feedback when user interacts)
+function showCareMessage(type) {
+    const options = messages[type];
+    const random = options[Math.floor(Math.random() * options.length)];
+    careMessage.textContent = random;
 }
 
+// -----  SOUND EFFECT (Each interaction plays a sound)
+function playSound() {
+    const audio = new Audio("assets/sounds/click.mp3");
+    audio.play();
+}
 
 // -----  GROWTH STAGE UPDATER (Based on interaction count)
 function updateStage(count) {
@@ -155,40 +183,6 @@ function updateProgressBar(count) {
     progressBar.style.width = percent + "%";
 }
 
-// -----  RANDOM CARE MESSAGE (Feedback when user interacts)
-function showCareMessage(type) {
-    const options = messages[type];
-    const random = options[Math.floor(Math.random() * options.length)];
-    careMessage.textContent = random;
-}
-
-// -----  SOUND EFFECT (Each interaction plays a sound)
-function playSound() {
-    const audio = new Audio("assets/sounds/click.mp3");
-    audio.play();
-}
-
-// -----  HANDLE USER INTERACTION (Main care handler)
-function handleInteraction(type) {
-    let count = parseInt(localStorage.getItem("interactions")) || 0;
-    count++;
-    localStorage.setItem("interactions", count);
-
-    interactionCountDisplay.textContent = count;
-    updateStage(count);
-    updateProgressBar(count);
-    showCareMessage(type);
-    checkBadge(count);
-    playSound();
-    startSadnessTimer();
-    updateSessionInteractionCount();
-
-    plantImage.style.transform = "scale(1.05)";
-    setTimeout(() => {
-        plantImage.style.transform = "scale(1)";
-    }, 150);
-}
-
 // -----  BADGE CHECKER (Checks if new badge is unlocked)
 function checkBadge(count) {
     const unlocked = JSON.parse(localStorage.getItem("unlockedBadges")) || [];
@@ -202,7 +196,22 @@ function checkBadge(count) {
     }
 }
 
-// -----  BADGE RENDERER (Shows all earned + progress to others)
+// ----- BADGE RENDERER -----
+// This function is responsible for displaying the badges the user has earned,
+// as well as showing the progress toward locked badges.
+//
+// 1. Retrieves the user's interaction count from localStorage.
+// 2. Gets the list of already unlocked badges.
+// 3. Clears the current badge list display to prepare for re-rendering.
+// 4. Iterates through all the predefined badges in the 'badges' array.
+// 5. For each badge:
+//    - Checks if the badge is already unlocked.
+//    - Calculates how close the user is to unlocking it (as a percentage).
+//    - Creates the visual structure for the badge, including title and progress bar.
+//    - If unlocked, it shows the badge icon and description.
+//    - If locked, it shows a lock icon and the badge description as "locked".
+// 6. Appends the created badge element to the badge list in the DOM.
+
 function renderBadges() {
     const badgeList = document.getElementById("badge-list");
     if (!badgeList) return;
@@ -264,6 +273,61 @@ function updateSessionInteractionCount() {
     console.log(`🔍 Session Interactions: ${sessionCount}`);
 }
 
+
+// ----- HANDLE USER INTERACTION (Main care handler)
+// This function processes each user interaction with the plant (watering, sunlight, fertilizer, talking).
+// It enforces care rules:
+// - Prevents repeating the same care action consecutively (except for "talk").
+// - Restricts fertilizer use to once every 4 other actions to avoid overfeeding.
+// Upon a valid interaction:
+// - It updates the interaction count and growth stage.
+// - Plays a sound and shows a random care message.
+// - Updates the session count, progress bar, and awards badges if milestones are met.
+// - Adds score points for good actions and deducts for incorrect ones.
+// - Applies a gentle animation to the plant image as feedback.
+// This function is central to the gamified plant experience, encouraging balanced and consistent care.
+
+function handleInteraction(type) {
+    let count = parseInt(localStorage.getItem("interactions")) || 0;
+
+    // Rule: no watering twice in a row
+    if (lastAction === type && type !== "talk") {
+        updateScore(-1);
+        careMessage.textContent = "⚠️ You can't repeat the same care action twice!";
+        return;
+    }
+
+    // Rule: fertilizer only every 4 actions
+    if (type === "fertilizer" && actionsSinceFertilizer < 4) {
+        updateScore(-5);
+        careMessage.textContent = "⚠️ You must care for the plant more before fertilizing!";
+        return;
+    }
+
+    // Valid action
+    count++;
+    localStorage.setItem("interactions", count);
+    interactionCountDisplay.textContent = count;
+    updateStage(count);
+    updateProgressBar(count);
+    showCareMessage(type);
+    checkBadge(count);
+    playSound();
+    startSadnessTimer();
+    updateSessionInteractionCount();
+
+    // Update score and logic rules
+    updateScore(2);
+    if (type === "fertilizer") actionsSinceFertilizer = 0;
+    else actionsSinceFertilizer++;
+    lastAction = type;
+
+    plantImage.style.transform = "scale(1.05)";
+    setTimeout(() => {
+        plantImage.style.transform = "scale(1)";
+    }, 150);
+}
+
 // -----  RESET APP (Clears everything and reloads)
 function resetApp() {
     localStorage.clear();
@@ -271,7 +335,7 @@ function resetApp() {
     window.location.href = "index.html";
 }
 
-// ----- FORM SUBMISSION HANDLER -----
+// -----  FORM SUBMISSION HANDLER -----
 // This function listens for the submission of the plant setup form.
 // It validates that the user's name only contains letters and spaces,
 // that the age is a valid number, and that the plant name is not empty.
@@ -287,35 +351,30 @@ if (form) {
         const ownerAge = ownerAgeInput.value.trim();
         const plantName = plantNameInput.value.trim();
 
-        // Regular expressions to validate name and age
         const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
         const ageRegex = /^[0-9]+$/;
 
-        // Validate name
         if (!nameRegex.test(ownerName)) {
             alert("Please enter a valid name. Only letters and spaces are allowed.");
             return;
         }
 
-        // Validate age
         if (!ageRegex.test(ownerAge)) {
             alert("Please enter a valid age. Only numbers are allowed.");
             return;
         }
 
-        // Validate plant name
         if (plantName.length === 0) {
             alert("Please give your little plant a name.");
             return;
         }
 
-        // 🎉 Age-based inspirational message
         const age = parseInt(ownerAge);
         let ageMessage = "";
 
-        if (age >= 0 && age <= 10) {
-            ageMessage = "🌟 You’re a kind-hearted child! This plant will grow with you. Take care of it with love!";
-        } else if (age >= 11 && age <= 17) {
+        if (age <= 10) {
+            ageMessage = "🌟 You’re a kind-hearted child! This plant will grow with you.";
+        } else if (age <= 17) {
             ageMessage = "🌱 You’re a responsible and creative teenager! Your plant will witness your journey.";
         } else if (age >= 18) {
             ageMessage = "🌳 You’re a capable adult! This plant will be your companion in peace and achievements.";
@@ -325,43 +384,37 @@ if (form) {
 
         alert(ageMessage);
 
-        // Save to localStorage
         localStorage.setItem("ownerName", ownerName);
         localStorage.setItem("ownerAge", ownerAge);
         localStorage.setItem("plantName", plantName);
         localStorage.setItem("interactions", 0);
         localStorage.setItem("unlockedBadges", JSON.stringify([]));
+        localStorage.setItem("score", 0);
 
-        // Show values in the console
         console.log("👤 Owner Name:", ownerName);
         console.log("🎂 Owner Age:", ownerAge);
         console.log("🪴 Plant Name:", plantName);
 
-        // Show loading screen
         welcomeScreen.style.display = "none";
         loadingScreen.style.display = "block";
 
         setTimeout(() => {
             loadingScreen.style.display = "none";
             mainScreen.style.display = "block";
-
-            // Reveal the main plant care container
             document.querySelector(".container-care-plant").classList.remove("hidden");
-
-            // Load user data on screen
             loadUserData();
         }, 2000);
     });
 }
 
-
-
-// -----  INITIALIZE APP ON LOAD
-window.addEventListener("DOMContentLoaded", () => {  //window.onload
+// -----  INITIALIZE APP ON LOAD -----
+// This function runs when the page loads. It checks if there is saved data
+// in localStorage. If so, it skips the welcome screen and shows the main interface.
+window.addEventListener("DOMContentLoaded", () => {
     const name = localStorage.getItem("ownerName");
     const popup = document.getElementById("badge-popup");
     if (popup) popup.classList.add("hidden");
-    sessionStorage.setItem("sessionInteractionCount", 0); // Reset session count
+    sessionStorage.setItem("sessionInteractionCount", 0);
 
     if (name) {
         welcomeScreen.style.display = "none";
@@ -370,11 +423,9 @@ window.addEventListener("DOMContentLoaded", () => {  //window.onload
         document.querySelector(".container-care-plant").classList.remove("hidden");
         loadUserData();
     }
-    // Llamar la función para mostrar datos en consola
-    showSavedUserData();
 });
 
-// -----  EVENT LISTENERS FOR CARE BUTTONS
+// -----  EVENT LISTENERS FOR CARE BUTTONS -----
 if (waterBtn) waterBtn.addEventListener("click", () => handleInteraction("water"));
 if (sunBtn) sunBtn.addEventListener("click", () => handleInteraction("sun"));
 if (fertilizerBtn) fertilizerBtn.addEventListener("click", () => handleInteraction("fertilizer"));

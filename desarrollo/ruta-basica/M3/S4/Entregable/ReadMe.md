@@ -1,70 +1,93 @@
-#  Plant Growth Simulator
+# 🌱 Virtual Plant Care App
 
-Este proyecto es un **simulador interactivo** de crecimiento de plantas, creado para practicar **manipulación del DOM**, **almacenamiento en el navegador** (Local Storage y Session Storage), y aplicar buenas prácticas de desarrollo frontend.
-
----
-
-## Funcionalidades principales
-
-* Formulario de bienvenida para capturar nombre, edad y nombre de la planta  
-* Almacenamiento de datos en **Local Storage**  
-* Recuperación y visualización automática al recargar la página  
-* Interacciones (regar, dar sol, fertilizar, hablar) con la planta  
-* Contador de interacciones usando **Session Storage**  
-* Evolución de la planta a través de 7 etapas de crecimiento   
-* Barra de progreso visual  
-* Sistema de insignias al lograr ciertas metas   
-* Temporizador de inactividad que entristece a la planta  
-* Botón para reiniciar toda la experiencia  
+Welcome to your own **Virtual Plant Companion**!  
+This gamified application encourages users to care for a plant through simple interactions — watering, giving sun, fertilizing, and speaking kindly to it. As you care for your plant, it grows, unlocks achievements, and reacts emotionally depending on your actions. 👩‍🌾🌞🪴
 
 ---
 
-##  Cómo usar
+## Features
 
-1. Abre el archivo `index.html` en tu navegador.
-2. Llena el formulario con tu nombre, edad y el nombre de tu planta.
-3. ¡Interactúa con tu plantita! Cada acción la ayuda a crecer.  
-4. Observa cómo progresa, gana insignias y responde a tu cariño.  
-5. Puedes reiniciar el juego con el botón "Reset".  
-
----
-
-## 🧠 Tecnologías utilizadas
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Local Storage y Session Storage del navegador
+- 🌿 Create and name your own plant and user profile.
+- ⏳ Grow your plant through multiple visual stages.
+- ✨ Earn badges as rewards for reaching care milestones.
+- 🔄 Real-time feedback with sound effects, growth updates, and messages.
+- 😢 The plant can feel neglected if ignored too long.
+- ⭐ **Score system** that increases or decreases depending on the quality of your actions.
 
 ---
 
-## 📂 Estructura del proyecto
+## Rules & Logic
+
+### Point System (Score)
+Your plant reacts to how well you take care of it. Each action can either **increase or decrease your score**:
+
+| Action                          | Score Impact |
+|----------------------------------|--------------|
+| ✅ Good care action (well-timed) | +2 points    |
+| ❌ Repeating the same action twice | -1 point     |
+| ❌ Using fertilizer too early     | -5 points    |
+
+> The current score is saved in `localStorage` and grows as your plant does! 🧪
+
+### Achievements & Badges
+
+You unlock medals based on how many interactions you've made:
+
+- 🥉 **Novice Gardener** – 5 interactions
+- 💚 **Passionate Gardener** – 10 interactions
+- 🥇 **Expert Gardener** – 15 interactions
+- 🌟 **Master of Growth** – 20 interactions
+
+A popup will celebrate every new badge you earn! 🎉
+
+---
+
+## Live Demo & Screenshot
+
+🌐 **Live Demo:** _Coming soon!_  
+📷 **Screenshot:**
+
+![App Screenshot](./assets/img/Screenshoot.png)
+
+---
+
+## 📁 Project Structure
 
 ```
-📁 Entregable/
+Entregable/
 │
-├── 📁 assets/
-│   ├── 📁 img/           → Imágenes de la planta en sus etapas y estados
-│   └── 📁 sounds/        → Efectos de sonido para cada interacción
+├── assets/
+│   ├── img/         → Plant growth stages, sad versions, favicon
+│   └── sounds/      → Click sound for interactions
 │
-├── 📄 index.html         → Página principal con el formulario de ingreso
-├── 📄 plant.html         → Vista principal de cuidado de la planta
-├── 📄 styles.css         → Estilos personalizados para toda la aplicación
-└── 📄 script.js          → Lógica del simulador y manejo del DOM
+├── index.html       → Main file (home screen and interaction UI)
+├── plant.html       → (Optional screen for extended features)
+├── styles.css       → All styling and layout
+├── script.js        → JavaScript logic (plant care, scoring, UI)
+└── ReadMe.md        → You’re reading it! 
 ```
 
 ---
 
-##  Captura
+## Tech Stack
 
-![Interfaz y consola](assets/img/Screenshoot.png)
-
----
-
-## 👩‍💻 Autora
-
-Desarrollado con 💚 por Vanesa Carrillo
+- **HTML5** – Semantic structure
+- **CSS3** – Layout, responsiveness, and animations
+- **JavaScript (Vanilla)** – DOM manipulation, logic, localStorage/sessionStorage
 
 ---
 
-¡Gracias por visitar este pequeño jardín digital! 🌼
+## How to Run
+
+1. Download or clone the repository.
+2. Open `index.html` in your browser.
+3. Enter your name, age, and plant name to begin.
+4. Start caring for your plant and unlocking achievements!
+
+---
+
+## 👩‍💻 Created By
+
+**Vanesa Carrillo**  
+_Creative developer, designer, and creator with a clear mission, to create joyful and meaningful digital experiences. 
+

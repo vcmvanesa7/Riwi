@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Virtual Plant </title>
+    <title>Your Virtual Plant</title>
     <link rel="stylesheet" href="./styles.css" />
     <link rel="icon" type="image/png" href="./assets/img/favicon.ico" />
-
 </head>
 
 <body>
@@ -37,8 +36,6 @@
         <p>Loading your plant... 🌿</p>
     </section>
 
-
-
     <!-- Main Interaction Screen -->
     <div class="container-care-plant hidden">
         <section id="main-screen" class="plant-layout">
@@ -65,7 +62,6 @@
                 <h4>🏅 Achievements Unlocked:</h4>
                 <ul id="badge-list"></ul>
             </div>
-
         </section>
 
         <!-- Right side: plant image -->
@@ -73,6 +69,7 @@
             <div id="plant-container">
                 <img id="plant-image" src="assets/img/0.png" alt="Your virtual plant" />
                 <div id="plant-shadow"></div>
+                <p>🌟 Score: <span id="score-display">0</span></p>
             </div>
 
             <div id="progress">
@@ -80,11 +77,12 @@
                 <p>Current stage: <span id="current-stage">Baby 🌱</span></p>
                 <div id="care-message"></div>
 
-                <!-- Barra de progreso -->
+                <!-- Progress Bar -->
                 <div class="progress-bar-container">
                     <div id="progress-bar" class="progress-bar-fill"></div>
                 </div>
             </div>
+
             <!-- Reset Button -->
             <div class="Reset-container">
                 <div>
@@ -97,14 +95,12 @@
         </section>
     </div>
 
-
-
     <!-- Badge Unlock Popup -->
     <div id="badge-popup" class="hidden">
         <div class="badge-card">
             <p id="badge-icon">🏅</p>
-            <h3 id="badge-title">Nueva Insignia</h3>
-            <p id="badge-description">¡Felicidades, desbloqueaste una insignia!</p>
+            <h3 id="badge-title">New Badge</h3>
+            <p id="badge-description">Congrats! You’ve unlocked a badge!</p>
         </div>
     </div>
 

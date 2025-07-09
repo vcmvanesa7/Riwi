@@ -71,6 +71,12 @@ h3 {
     align-items: center;
 }
 
+.right-size div p,
+#score-display {
+    color: #2d6a4f;
+    font-weight: bold;
+}
+
 h1 {
     font-weight: 800;
     color: #b457ff;
@@ -245,17 +251,18 @@ button:hover,
     display: flex;
     flex-direction: row;
     margin: 2rem auto;
+    gap: 2rem;
 }
 
 .intro-slogan {
     font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .intro-story {
     font-size: 0.9rem;
     color: #3c5b44;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .intro-image {
@@ -275,6 +282,12 @@ button:hover,
 .intro-rules li {
     margin-bottom: 0.5rem;
     font-weight: bold;
+}
+
+.intro-rules P {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 14px;
 }
 
 #user-name {
@@ -336,14 +349,16 @@ button:hover,
 /* Badge Popup */
 #badge-popup {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 20px 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 300px;
+    max-width: 90vw;
+    transition: opacity 0.3s ease;
 }
 
 .badge-card {
@@ -442,17 +457,106 @@ button:hover,
     transition: width 0.5s ease-in-out;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1024px) {
+
+    main,
+    #welcome-screen,
+    #loading-screen,
+    #intro-screen,
     #main-screen {
-        grid-template-columns: 1fr;
+        width: 80%;
+        padding: 2rem;
+    }
+
+    .right-size {
+        width: 90%;
+        margin-top: 2rem;
+    }
+
+    .container-care-plant {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1rem;
+    }
+
+    .intro-container,
+    #main-screen,
+    #welcome-screen,
+    #loading-screen,
+    #intro-screen {
+        width: 100%;
+        padding: 1.5rem;
     }
 
     #plant-container {
         margin-top: 2rem;
+        max-width: 90%;
     }
 
-    .left-panel {
-        text-align: center;
+    #plant-image {
+        height: 18rem;
+        width: auto;
+    }
+
+    .Reset-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #care-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #care-actions button {
+        flex: 1 1 45%;
+        margin: 0.25rem;
+    }
+
+    #badge-section {
+        width: 100%;
+    }
+
+    .intro-image {
+        height: auto;
+        width: 100%;
+    }
+
+    .intro-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .badge-card {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    #plant-image {
+        height: 14rem;
+    }
+
+    .progress-bar-fill,
+    .progress-bar {
+        height: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
     }
 }

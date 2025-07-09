@@ -271,39 +271,90 @@ function resetApp() {
     window.location.href = "index.html";
 }
 
-// -----  FORM SUBMISSION (When user sets up the plant)
+// ----- FORM SUBMISSION HANDLER -----
+// This function listens for the submission of the plant setup form.
+// It validates that the user's name only contains letters and spaces,
+// that the age is a valid number, and that the plant name is not empty.
+// Depending on the age range, it shows an inspirational message.
+// Upon successful validation, it stores the data in localStorage,
+// displays a loading screen, and then transitions to the main plant care screen.
+
 if (form) {
     form.addEventListener("submit", function (e) {
         e.preventDefault();
+
         const ownerName = ownerNameInput.value.trim();
         const ownerAge = ownerAgeInput.value.trim();
         const plantName = plantNameInput.value.trim();
 
+        // Regular expressions to validate name and age
+        const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+        const ageRegex = /^[0-9]+$/;
+
+        // Validate name
+        if (!nameRegex.test(ownerName)) {
+            alert("Please enter a valid name. Only letters and spaces are allowed.");
+            return;
+        }
+
+        // Validate age
+        if (!ageRegex.test(ownerAge)) {
+            alert("Please enter a valid age. Only numbers are allowed.");
+            return;
+        }
+
+        // Validate plant name
+        if (plantName.length === 0) {
+            alert("Please give your little plant a name.");
+            return;
+        }
+
+        // 🎉 Age-based inspirational message
+        const age = parseInt(ownerAge);
+        let ageMessage = "";
+
+        if (age >= 0 && age <= 10) {
+            ageMessage = "🌟 You’re a kind-hearted child! This plant will grow with you. Take care of it with love!";
+        } else if (age >= 11 && age <= 17) {
+            ageMessage = "🌱 You’re a responsible and creative teenager! Your plant will witness your journey.";
+        } else if (age >= 18) {
+            ageMessage = "🌳 You’re a capable adult! This plant will be your companion in peace and achievements.";
+        } else {
+            ageMessage = "🌸 Age not recognized, but we know you have a beautiful soul.";
+        }
+
+        alert(ageMessage);
+
+        // Save to localStorage
         localStorage.setItem("ownerName", ownerName);
         localStorage.setItem("ownerAge", ownerAge);
         localStorage.setItem("plantName", plantName);
         localStorage.setItem("interactions", 0);
         localStorage.setItem("unlockedBadges", JSON.stringify([]));
 
-        // Mostrar datos inmediatamente en consola (opcional)
+        // Show values in the console
         console.log("👤 Owner Name:", ownerName);
         console.log("🎂 Owner Age:", ownerAge);
         console.log("🪴 Plant Name:", plantName);
 
-        // También actualiza la vista en pantalla
-        loadUserData();
-
-        // Pantallas
+        // Show loading screen
         welcomeScreen.style.display = "none";
         loadingScreen.style.display = "block";
 
         setTimeout(() => {
             loadingScreen.style.display = "none";
             mainScreen.style.display = "block";
+
+            // Reveal the main plant care container
+            document.querySelector(".container-care-plant").classList.remove("hidden");
+
+            // Load user data on screen
             loadUserData();
         }, 2000);
     });
 }
+
+
 
 // -----  INITIALIZE APP ON LOAD
 window.addEventListener("DOMContentLoaded", () => {  //window.onload
@@ -316,6 +367,7 @@ window.addEventListener("DOMContentLoaded", () => {  //window.onload
         welcomeScreen.style.display = "none";
         loadingScreen.style.display = "none";
         mainScreen.style.display = "block";
+        document.querySelector(".container-care-plant").classList.remove("hidden");
         loadUserData();
     }
     // Llamar la función para mostrar datos en consola

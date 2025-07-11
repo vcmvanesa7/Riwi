@@ -1,0 +1,80 @@
+1. CREAR PROYECTO CON VITE:
+
+  Paso a Paso                                               npm create vite@latest
+
+  Paso	Método Profe (manual)	                              Tu Método (automático con Vite)
+  Iniciar proyecto Node	npm init -y	                        ✅ Lo hizo por ti
+  Instalar Vite	npm install -D vite	                        ✅ Lo hizo por ti
+  Crear script "dev"	Editar package.json	                  ✅ Ya viene creado
+  Estructura base	Crear a mano /src, index.html, etc.     	✅ Ya viene creada y lista
+  Ejecutar servidor	npm run dev	                            ✅ Igualito
+
+// “Inicialicé el proyecto con Vite usando el comando oficial npm create vite@latest que genera automáticamente la estructura base, Inicializa el proyecto con Node,
+Genera package.json automáticamente, instala Vite y configura los scripts necesarios. Es una forma moderna y eficiente aprobada por la documentación oficial.”
+
+
+
+Elemento	                ¿Qué hace?	                                              ¿Lo genera Vite?	            ¿Sirve para…?
+package.json	            Configura todo el proyecto, scripts, dependencias	        ✅ Sí	                       Levantar Vite y scripts
+db.json	                  Mini base de datos falsa para practicar con json-server	  ❌ No	                       Simular una API REST
+scripts en package.json	  Comandos como npm run dev, npm run json:server	          ✅ Lo agregas tú o Vite	     Automatizar tareas
+
+
+📦 /mi-sistema-vite
+├── 📁 public
+│   └── logo.png              ← Imágenes accesibles por ruta absoluta
+├── 📁 src
+│   ├── 📁 assets              ← CSS, imágenes internas, íconos, etc.
+│   │   ├── styles.css
+│   ├── 📁 components          ← Reutilizables (header, sidebar, modal)
+│   │   ├── header.js
+│   │   ├── sidebar.js
+│   │   └── modal.js
+│   ├── 📁 pages               ← "Vistas": login, dashboard, home, etc.
+│   │   ├── login.js
+│   │   ├── register.js
+│   │   ├── dashboard.js
+│   │   ├── public.js         ← Vista pública (visitante)
+│   ├── 📁 services            ← Comunicación con la API (CRUD)
+│   │   ├── auth.js           ← login, registro, localStorage
+│   │   ├── users.js          ← GET, POST, PUT, DELETE users
+│   │   ├── courses.js        ← CRUD cursos
+│   │   ├── enrollments.js    ← inscripciones
+│   ├── 📁 utils               ← Helpers: validaciones, formateo
+│   │   ├── validation.js
+│   │   ├── storage.js        ← getUserStorage, saveSession, etc.
+│   └── main.js               ← Punto de entrada: enrutamiento SPA
+├── 📄 index.html             ← HTML único de la SPA
+├── 📄 db.json                ← Base de datos falsa para JSON Server
+├── 📄 package.json
+
+
+| Vista                 | Ruta esperada       | Visible para...           | Contenido                      |
+| --------------------- | ------------------- | ------------------------- | ------------------------------ |
+| `login`               | `/login`            | Todos                     | Formulario para iniciar sesión |
+| `register`            | `/register`         | Todos                     | Formulario de registro         |
+| `public` (visitante)  | `/` o `/home`       | No logueados              | Lista pública de cursos        |
+| `dashboard`           | `/admin` o `/panel` | Solo admin                | Panel de control, gestión CRUD |
+| `userHome` (opcional) | `/mis-cursos`       | Usuarios logueados (user) | Cursos inscritos               |
+
+
+2. En el main.js cargo las vistas correspondientes:
+import { renderLogin } from './pages/login.js';
+import { renderDashboard } from './pages/dashboard.js';
+import { renderPublic } from './pages/public.js';
+import { getUserStorage } from './utils/storage.js'
+//Estos son import estamos trayendo funciones que están definidas en otros archivos, para usarlas aquí en main.js.
+
+| Línea             | ¿Qué trae?                                                   | ¿Desde dónde?            |
+| ----------------- | ------------------------------------------------------------ | ------------------------ |
+| `renderLogin`     | Función que dibuja o construye el login                      | `src/pages/login.js`     |
+| `renderDashboard` | Función que construye el panel admin                         | `src/pages/dashboard.js` |
+| `renderPublic`    | Función que muestra la vista pública                         | `src/pages/public.js`    |
+| `getUserStorage`  | Función que revisa si hay usuario guardado en `localStorage` | `src/utils/storage.js`   |
+
+  2.1 const app = document.getElementById('app');
+  ¿Qué hace esto?
+  Toma el elemento con id="app" del HTML (el div donde vamos a renderizar todo).
+  Lo guarda en la constante app para poder usarlo más adelante.
+
+  2.2 

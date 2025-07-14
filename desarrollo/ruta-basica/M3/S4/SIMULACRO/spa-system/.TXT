@@ -450,3 +450,45 @@ Porque function tiene su propia palabra clave.
 En cambio () => {} es una expresión (una constante que guarda una función),
 así que async tiene que ir antes de toda la expresión, no dentro
 
+✅ PRÓXIMOS PASOS
+Te recomiendo enfocarte en esto para cerrar el reto:
+
+✅ Terminar edición y eliminación de usuarios.
+
+⚒️ Crear módulo visual de cursos:
+
+Tabla de cursos
+
+Crear/editar con modal
+
+Borrar curso con confirmación
+
+⚒️ Crear vista pública:
+
+Lista de cursos
+
+Botón "Inscribirme"
+
+⚒️ Crear tabla enrollments y lógica de inscripciones
+
+📝 Crear README.md con:
+
+Instrucciones de instalación (npm install, json-server)
+
+Tecnologías usadas
+
+Estructura del proyecto
+
+Capturas si puedes
+
+📁 Asegurar que tus archivos estén organizados por módulos:
+
+css
+Copiar código
+src/
+├── components/
+├── pages/
+├── services/
+├── utils/
+├── assets/
+└── main.js

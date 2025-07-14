@@ -493,3 +493,294 @@ Y mostrar:
 
 Estás avanzando súper bien, Vane 🌟 ¡Vamos por ese módulo! 🚀
 
+¡Exactamente, Vane! 💡 Así como tienes los usuarios guardados en el db.json bajo "users", y ahora los eventos bajo "events", también debes agregar las inscripciones en una sección llamada "enrollments".
+
+Aquí te muestro cómo debe estar tu db.json completo con todo funcionando para el proyecto:
+
+
+---
+
+📦 Ejemplo completo de db.json (con usuarios, eventos e inscripciones):
+
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@admin.com",
+      "password": "admin123",
+      "role": "admin",
+      "phone": "1234567890",
+      "enrollNumber": "98765432100000",
+      "dateOfAdmission": "01-Jan-2020"
+    },
+    {
+      "id": 2,
+      "name": "Vanesa",
+      "email": "vane@correo.com",
+      "password": "vane123",
+      "role": "user",
+      "phone": "0987654321",
+      "enrollNumber": "12345678900000",
+      "dateOfAdmission": "10-Feb-2024"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Introducción a JavaScript",
+      "description": "Curso básico de JS",
+      "date": "2025-07-15",
+      "location": "Medellín",
+      "duration": "3h",
+      "capacity": 3
+    },
+    {
+      "id": 2,
+      "title": "Curso HTML y CSS",
+      "description": "Curso completo de diseño web",
+      "date": "2025-08-01",
+      "location": "Bogotá",
+      "duration": "5h",
+      "capacity": 2
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "userId": 2,
+      "eventId": 1
+    }
+  ]
+}
+
+
+---
+
+🔁 ¿Qué pasa cuando un usuario se inscribe?
+
+Cada vez que un usuario se inscribe a un evento:
+
+✅ Se añade un objeto a enrollments como este:
+
+{
+  "id": 2,
+  "userId": 2,
+  "eventId": 2
+}
+
+Eso le dice al sistema: “El usuario con ID 2 está inscrito al evento con ID 2”.
+
+
+---
+
+🧠 ¿Y cómo se conecta todo?
+
+Con eventId accedes a los detalles del evento.
+
+Con userId sabes quién está inscrito.
+
+¡Y puedes cruzar esos datos para contar cuántos inscritos hay por evento!
+
+
+
+---
+
+¿Te gustaría que te prepare también la parte admin para crear eventos desde la app (CRUD)?
+¡O seguimos ajustando esta parte de usuario hasta que quede hermosa! 😍
+
+Estoy contigo pasito a pasito 🐾✨
+
+¡Perfecta pregunta, Vane! 😍
+Aquí tienes el paso a paso exacto de las partes del código que debes tener o modificar para que tu app:
+
+✅ Lea los eventos desde el db.json
+✅ Muestre los eventos en la vista del usuario
+✅ Guarde nuevas inscripciones al evento (enrollments)
+✅ Y valide cupos antes de inscribir
+
+
+---
+
+🧩 PARTES QUE DEBES TENER Y/O ACTUALIZAR:
+
+
+---
+
+✅ 1. db.json (servidor JSON Server)
+
+Asegúrate de tener:
+
+{
+  "users": [ ... ],
+  "events": [ ... ],
+  "enrollments": [ ... ]
+}
+
+Cada tabla funciona como si fuera una colección de base de datos.
+
+
+---
+
+✅ 2. /services/events.js
+
+Este archivo se encarga de leer eventos y obtener uno por ID.
+
+const API_URL = 'http://localhost:3000/events';
+
+export async function getEvents() {
+  const res = await fetch(API_URL);
+  return await res.json();
+}
+
+export async function getEventById(id) {
+  const res = await fetch(`${API_URL}/${id}`);
+  return await res.json();
+}
+
+
+---
+
+✅ 3. /services/enrollments.js
+
+Este archivo lee inscripciones existentes y crea nuevas.
+
+const ENROLL_URL = 'http://localhost:3000/enrollments';
+
+export async function getEnrollments() {
+  const res = await fetch(ENROLL_URL);
+  return await res.json();
+}
+
+export async function createEnrollment(enrollment) {
+  const res = await fetch(ENROLL_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(enrollment)
+  });
+  return await res.json();
+}
+
+
+---
+
+✅ 4. /utils/storage.js
+
+Debes tener esta función si no la tienes aún:
+
+export function getUserStorage() {
+  return JSON.parse(localStorage.getItem('loggedUser'));
+}
+
+
+---
+
+✅ 5. /pages/userHome.js
+
+Aquí es donde se lee la info y se renderiza en la pantalla del usuario.
+Reemplaza o ajusta tu renderUserHome(app) así:
+
+import { getEvents, getEventById } from '../services/events.js';
+import { getEnrollments, createEnrollment } from '../services/enrollments.js';
+import { getUserStorage } from '../utils/storage.js';
+
+export async function renderUserHome(app) {
+  const user = getUserStorage();
+  const events = await getEvents();
+  const enrollments = await getEnrollments();
+
+  let tableRows = '';
+
+  for (let event of events) {
+    const inscritos = enrollments.filter(e => e.eventId === event.id);
+    const yaInscrito = inscritos.some(e => e.userId === user.id);
+    const cupos = event.capacity - inscritos.length;
+
+    tableRows += `
+      <tr>
+        <td>${event.title}</td>
+        <td>${event.description}</td>
+        <td>${event.date}</td>
+        <td>${event.location}</td>
+        <td>${event.duration}</td>
+        <td>${cupos > 0 ? cupos : 'Lleno'}</td>
+        <td>
+          ${yaInscrito
+            ? 'Ya inscrito'
+            : cupos > 0
+              ? `<button class="btn-inscribir" data-id="${event.id}">Inscribirme</button>`
+              : 'Sin cupo'}
+        </td>
+      </tr>
+    `;
+  }
+
+  app.innerHTML = `
+    <section>
+      <h2>Eventos disponibles</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Duración</th>
+            <th>Cupos</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRows}
+        </tbody>
+      </table>
+    </section>
+  `;
+
+  // Escuchamos los botones de inscripción
+  document.querySelectorAll('.btn-inscribir').forEach(button => {
+    button.addEventListener('click', async () => {
+      const eventId = parseInt(button.dataset.id);
+      const inscritos = enrollments.filter(e => e.eventId === eventId);
+      const yaInscrito = inscritos.some(e => e.userId === user.id);
+
+      if (yaInscrito) {
+        alert('Ya estás inscrito en este evento');
+        return;
+      }
+
+      const event = await getEventById(eventId);
+      if (inscritos.length >= event.capacity) {
+        alert('Cupos agotados para este evento');
+        return;
+      }
+
+      await createEnrollment({ userId: user.id, eventId });
+      alert('¡Inscripción exitosa!');
+      renderUserHome(app); // Volver a cargar vista
+    });
+  });
+}
+
+
+---
+
+✅ 6. Revisión final: ¿Qué archivos se ven afectados?
+
+Archivo	¿Qué hace?
+
+db.json	Base de datos (eventos, usuarios, etc)
+services/events.js	Leer eventos
+services/enrollments.js	Leer y guardar inscripciones
+utils/storage.js	Obtener el usuario logueado
+pages/userHome.js	Mostrar eventos + lógica de inscripción
+
+
+
+---
+
+¿Te gustaría que hagamos juntas una función que muestre solo los eventos a los que el usuario ya se ha inscrito también?
+O seguimos con la vista de administrador para crear nuevos eventos desde un formulario 💻✨
+
+Tú mandas, Vane 💪🌟
+

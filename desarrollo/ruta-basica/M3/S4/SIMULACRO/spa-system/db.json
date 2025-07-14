@@ -1,3 +1,14 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "002",
+      "name": "Manuel",
+      "email": "manu@gmail.com",
+      "password": "123Aa.1*gf",
+      "role": "admin",
+      "phone": "3085456789",
+      "dateOfAdmission": "2025-07-14",
+      "enrollNumber": "MAT-002"
+    }
+  ]
 }

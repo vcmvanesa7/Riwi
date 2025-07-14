@@ -1,9 +1,10 @@
-const API_URL = 'http://localhost:3000/users'; // Ruta a abase de datos
+const API_URL = 'http://localhost:3000/users'; // Ruta a la base de datos
 
 /**
  * Registra un nuevo usuario después de validar datos
+ * Si se proporciona un userId, se asume que es una edición y se omiten ciertos pasos
  */
-export async function registerUser(newUser) {
+export async function registerUser(newUser, userId = null) {
     try {
         // 1. Limpieza general de datos
         const name = newUser.name.trim();
@@ -46,13 +47,18 @@ export async function registerUser(newUser) {
             return null;
         }
 
-        // 7. Validar si el correo ya existe (usando email limpio)
+        // ✅ 7. Verificar si el correo ya existe en otro usuario distinto (IMPORTANTE para edición)
         const resCheck = await fetch(`${API_URL}?email=${email}`);
         const usersWithEmail = await resCheck.json();
 
-        if (usersWithEmail.length > 0) {
-            alert('Este correo ya está registrado. Por favor inicia sesión.');
+        // ✅ Solo bloqueamos si estamos creando un nuevo usuario
+        if (!userId && usersWithEmail.length > 0) {
             return null;
+        }
+
+        // Si es edición, solo validamos correo y retornamos true (el PUT se maneja fuera)
+        if (userId) {
+            return true;
         }
 
         // 8. Generar ID automático (secuencial según número de registros actuales)
@@ -66,7 +72,7 @@ export async function registerUser(newUser) {
         // 10. Generar número de matrícula automático
         const enrollNumber = `MAT-${nextId}`;
 
-        // 11. Usuario final
+        // 11. Usuario final para enviar a la base de datos
         const userToRegister = {
             id: nextId,
             name,
@@ -78,8 +84,7 @@ export async function registerUser(newUser) {
             enrollNumber
         };
 
-
-        // 12. Enviar al servidor
+        // 12. Enviar al servidor con método POST
         const res = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -115,3 +120,21 @@ export async function getAllUsers() {
     }
 }
 
+/**
+ * Elimina un usuario por ID
+ * @param {string} userId 
+ * @returns {boolean} true si se eliminó correctamente
+ */
+export async function deleteUser(userId) {
+    try {
+        const res = await fetch(`http://localhost:3000/users/${userId}`, {
+            method: 'DELETE'
+        });
+
+        if (!res.ok) throw new Error('Error al eliminar el usuario');
+        return true;
+    } catch (error) {
+        console.error('Error en deleteUser:', error);
+        return false;
+    }
+}

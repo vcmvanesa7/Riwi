@@ -76,13 +76,27 @@ export function renderDashboard(app) {
 
         try {
             if (userId) {
-                // Edición (PUT)
+                // Validar antes de actualizar (permite mismo correo si no es de otro usuario)
+                const isValid = await registerUser(newUser, userId); // 👈 validación con soporte para edición
+                if (!isValid) return;
+
+                // Antes de actualizar, traemos el usuario actual para conservar matrícula y fecha
+                const res = await fetch(`http://localhost:3000/users/${userId}`);
+                const currentUser = await res.json();
+
+                // Añadimos matrícula y fecha originales
+                newUser.enrollNumber = currentUser.enrollNumber;
+                newUser.dateOfAdmission = currentUser.dateOfAdmission;
+
+                // ✏️ Ahora sí actualizamos
                 await fetch(`http://localhost:3000/users/${userId}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newUser)
                 });
 
+            } else {
+                // ✅ Solo en creación validamos clave de admin
                 if (newUser.role === 'admin') {
                     const key = document.getElementById('modal-admin-key').value;
                     if (key !== 'claveadmin123') {
@@ -90,13 +104,8 @@ export function renderDashboard(app) {
                         return;
                     }
                 }
-
-                // Creación (POST) delegada a registerUser
                 const created = await registerUser(newUser);
-                if (!created) {
-                    // Si la validación o el registro falla, salimos sin cerrar modal
-                    return;
-                }
+                if (!created) return;
             }
 
             // Limpiar, cerrar modal y actualizar tabla

@@ -1,9 +1,11 @@
-import { registerUser } from '../services/users.js';
-
 /**
  * Renderiza el modal para crear o editar usuarios
  */
 export function renderModal() {
+    // Elimina cualquier modal duplicado antes de crear uno nuevo
+    const existingModal = document.getElementById('user-modal');
+    if (existingModal) existingModal.remove();
+
     const modal = document.createElement('div');
     modal.id = 'user-modal';
     modal.classList.add('modal');
@@ -33,7 +35,6 @@ export function renderModal() {
           <option value="admin">Administrador</option>
         </select>
 
-        <!-- Clave secreta para admin (se muestra solo si elige admin) -->
         <div id="modal-admin-key-container" style="display: none;">
           <label for="modal-admin-key">Clave secreta de admin:</label>
           <input type="password" id="modal-admin-key" name="adminKey" />
@@ -49,44 +50,12 @@ export function renderModal() {
     // Cerrar modal al hacer clic en la X
     document.getElementById('close-modal').addEventListener('click', closeModal);
 
-    // Mostrar/ocultar clave secreta en modal según rol
+    // Mostrar/ocultar clave secreta si el rol es admin
     const roleSelect = document.getElementById('modal-role');
     const keyContainer = document.getElementById('modal-admin-key-container');
+
     roleSelect.addEventListener('change', () => {
         keyContainer.style.display = roleSelect.value === 'admin' ? 'block' : 'none';
-    });
-
-    // 👉 Envío del formulario: envía al servidor y refresca tabla
-    document.getElementById('user-form').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Evita recarga automática
-
-        // Recojo datos visibles del modal
-        const newUser = {
-            name: document.getElementById('modal-name').value.trim(),
-            email: document.getElementById('modal-email').value.trim(),
-            password: document.getElementById('modal-password').value,
-            role: document.getElementById('modal-role').value,
-            phone: document.getElementById('modal-phone').value.trim()
-            // enrollNumber y dateOfAdmission los crea registerUser
-        };
-
-        // Validar clave interna para admin
-        if (newUser.role === 'admin') {
-            const key = document.getElementById('modal-admin-key').value;
-            const SECRET_KEY = 'claveadmin123';
-            if (key !== SECRET_KEY) {
-                // Podrías mostrar error inline en lugar de alert
-                alert('Clave secreta incorrecta.');
-                return;
-            }
-        }
-
-        // Llamada centralizada a registerUser
-        const created = await registerUser(newUser);
-        if (!created) return; // Si falla validación, no cerramos modal
-
-        closeModal();            // Cierra el modal
-        location.reload();      // Refresca la vista del dashboard
     });
 }
 
@@ -105,9 +74,8 @@ export function openModal(userData = null) {
     if (userData) {
         title.textContent = 'Editar usuario';
         submitBtn.textContent = 'Actualizar';
-        form.dataset.userId = userData.id;
+        form.dataset.userId = userData.id.toString();
 
-        // Rellenar campos con userData
         document.getElementById('modal-name').value = userData.name;
         document.getElementById('modal-email').value = userData.email;
         document.getElementById('modal-phone').value = userData.phone || '';

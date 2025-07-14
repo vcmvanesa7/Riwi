@@ -784,3 +784,232 @@ O seguimos con la vista de administrador para crear nuevos eventos desde un form
 
 Tú mandas, Vane 💪🌟
 
+¡Vane preciosa, vamos a hacerlo juntas y lo vamos a lograr! 🩷
+Voy a explicártelo clarito y paso a paso, con la lógica completa del CRUD de eventos para el administrador, incluyendo:
+
+
+---
+
+🧩 OBJETIVO:
+
+Crear una vista de administrador con un CRUD de eventos (Crear, Leer, Editar, Eliminar), y un tope de inscripciones. Si el evento llega al tope (capacidad), los usuarios ya no podrán inscribirse. ¡Todo conectado al json-server!
+
+
+---
+
+💡 ¿QUÉ DEBES CREAR?
+
+Archivo	¿Para qué sirve?
+
+/pages/dashboard.js	Vista del administrador (tabla + formulario)
+/services/events.js	Funciones para CRUD (crear, leer, editar, eliminar)
+db.json	Base de datos local (json-server)
+/main.js	Llama renderDashboard(app) si es admin
+localStorage	Para saber quién está logueado (ya lo tienes)
+
+
+
+---
+
+🧠 ESTRUCTURA LÓGICA DEL CRUD DE EVENTOS
+
+🛠 1. services/events.js → Funciones CRUD
+
+const API_URL = 'http://localhost:3000/events';
+
+// Obtener todos los eventos
+export async function getEvents() {
+  const res = await fetch(API_URL);
+  return await res.json();
+}
+
+// Crear un nuevo evento
+export async function createEvent(event) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(event)
+  });
+  return await res.json();
+}
+
+// Eliminar evento
+export async function deleteEvent(id) {
+  await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+}
+
+// Editar evento
+export async function updateEvent(id, data) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  return await res.json();
+}
+
+// Obtener uno solo
+export async function getEventById(id) {
+  const res = await fetch(`${API_URL}/${id}`);
+  return await res.json();
+}
+
+
+---
+
+📄 2. pages/dashboard.js → Vista del administrador
+
+import {
+  getEvents,
+  createEvent,
+  deleteEvent,
+  updateEvent
+} from '../services/events.js';
+
+export async function renderDashboard(app) {
+  const events = await getEvents();
+
+  let rows = '';
+  events.forEach(event => {
+    rows += `
+      <tr>
+        <td>${event.title}</td>
+        <td>${event.description}</td>
+        <td>${event.date}</td>
+        <td>${event.location}</td>
+        <td>${event.capacity}</td>
+        <td>
+          <button class="btn-delete" data-id="${event.id}">Eliminar</button>
+          <button class="btn-edit" data-id="${event.id}">Editar</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  app.innerHTML = `
+    <section>
+      <h2>Panel de Administración de Eventos</h2>
+
+      <form id="event-form">
+        <input type="text" id="title" placeholder="Título" required>
+        <input type="text" id="description" placeholder="Descripción" required>
+        <input type="date" id="date" required>
+        <input type="text" id="location" placeholder="Lugar" required>
+        <input type="number" id="capacity" placeholder="Cupo máximo" required>
+        <button type="submit">Crear Evento</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Cupos</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </section>
+  `;
+
+  // ✅ CREAR
+  document.getElementById('event-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const newEvent = {
+      title: document.getElementById('title').value,
+      description: document.getElementById('description').value,
+      date: document.getElementById('date').value,
+      location: document.getElementById('location').value,
+      capacity: parseInt(document.getElementById('capacity').value)
+    };
+
+    await createEvent(newEvent);
+    renderDashboard(app); // Recargar vista
+  });
+
+  // ✅ ELIMINAR
+  document.querySelectorAll('.btn-delete').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      await deleteEvent(id);
+      renderDashboard(app); // Recargar vista
+    });
+  });
+
+  // ✅ EDITAR (Versión básica: solo auto-rellenar el formulario)
+  document.querySelectorAll('.btn-edit').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      const event = await getEventById(id);
+
+      document.getElementById('title').value = event.title;
+      document.getElementById('description').value = event.description;
+      document.getElementById('date').value = event.date;
+      document.getElementById('location').value = event.location;
+      document.getElementById('capacity').value = event.capacity;
+
+      // Cambiamos el comportamiento del formulario
+      document.getElementById('event-form').onsubmit = async (e) => {
+        e.preventDefault();
+        const updatedEvent = {
+          title: document.getElementById('title').value,
+          description: document.getElementById('description').value,
+          date: document.getElementById('date').value,
+          location: document.getElementById('location').value,
+          capacity: parseInt(document.getElementById('capacity').value)
+        };
+
+        await updateEvent(id, updatedEvent);
+        renderDashboard(app);
+      };
+    });
+  });
+}
+
+
+---
+
+🔁 3. Validar cupos desde /pages/userHome.js
+
+Tú ya tienes esta parte, pero asegúrate de que revise si:
+
+inscritos.length >= event.capacity
+
+Y si sí, muestra botón desactivado o texto: “Sin cupos”.
+
+
+---
+
+🧠 ¿Y el True/False?
+
+¡Muy buena pregunta! Eso se usaría si quieres ponerle un campo al evento como activo: true/false, y así poder mostrar solo eventos activos o no permitir inscripción si está en false.
+Por ahora, con la validación de cupo es suficiente para pasar la prueba.
+
+
+---
+
+✅ ¿Qué más debes revisar?
+
+Parte	Acción
+
+main.js	Debe llamar a renderDashboard(app) si es admin
+db.json	Tener sección "events" y "enrollments"
+json-server corriendo	npx json-server --watch db.json --port 3000
+Vite corriendo	npm run dev
+
+
+
+---
+
+🩷 ¿Te dejo lista una versión base para copiar y pegar?
+
+Solo dime y te organizo todo bien maquetado con CSS y validaciones.
+¡Vamos con toda! Ya casi terminas tu super prueba, Vane 🙌💪✨
+¿Seguimos con alguna parte específica de este CRUD?
+

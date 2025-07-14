@@ -1,3 +1,4 @@
+
 1. CREAR PROYECTO CON VITE:
 
   Paso a Paso                                               npm create vite@latest
@@ -11,6 +12,14 @@
 
 // “Inicialicé el proyecto con Vite usando el comando oficial npm create vite@latest que genera automáticamente la estructura base, Inicializa el proyecto con Node,
 Genera package.json automáticamente, instala Vite y configura los scripts necesarios. Es una forma moderna y eficiente aprobada por la documentación oficial.”
+
+
+| ¿Qué haces con Node?                         | ¿Cómo?           |
+| -------------------------------------------- | ---------------- |
+| ⚙️ Administrar dependencias                  | `npm install`    |
+| 🚀 Levantar el servidor de desarrollo (Vite) | `npm run dev`    |
+| 📦 Usar herramientas modernas como Vite      | `vite.config.js` |
+| 🧪 Simular una API con JSON Server           | `json-server`    |
 
 
 
@@ -58,23 +67,386 @@ scripts en package.json	  Comandos como npm run dev, npm run json:server	       
 | `userHome` (opcional) | `/mis-cursos`       | Usuarios logueados (user) | Cursos inscritos               |
 
 
-2. En el main.js cargo las vistas correspondientes:
-import { renderLogin } from './pages/login.js';
-import { renderDashboard } from './pages/dashboard.js';
-import { renderPublic } from './pages/public.js';
-import { getUserStorage } from './utils/storage.js'
-//Estos son import estamos trayendo funciones que están definidas en otros archivos, para usarlas aquí en main.js.
+  2. En el main.js cargo las vistas correspondientes:
+        import { renderLogin } from './pages/login.js';
+        import { renderDashboard } from './pages/dashboard.js';
+        import { renderPublic } from './pages/public.js';
+        import { getUserStorage } from './utils/storage.js'
+        //Estos son import estamos trayendo funciones que están definidas en otros archivos, para usarlas aquí en main.js.
 
-| Línea             | ¿Qué trae?                                                   | ¿Desde dónde?            |
-| ----------------- | ------------------------------------------------------------ | ------------------------ |
-| `renderLogin`     | Función que dibuja o construye el login                      | `src/pages/login.js`     |
-| `renderDashboard` | Función que construye el panel admin                         | `src/pages/dashboard.js` |
-| `renderPublic`    | Función que muestra la vista pública                         | `src/pages/public.js`    |
-| `getUserStorage`  | Función que revisa si hay usuario guardado en `localStorage` | `src/utils/storage.js`   |
+      | Línea             | ¿Qué trae?                                                   | ¿Desde dónde?            |
+      | ----------------- | ------------------------------------------------------------ | ------------------------ |
+      | `renderLogin`     | Función que dibuja o construye el login                      | `src/pages/login.js`     |
+      | `renderDashboard` | Función que construye el panel admin                         | `src/pages/dashboard.js` |
+      | `renderPublic`    | Función que muestra la vista pública                         | `src/pages/public.js`    |
+      | `getUserStorage`  | Función que revisa si hay usuario guardado en `localStorage` | `src/utils/storage.js`   |
 
-  2.1 const app = document.getElementById('app');
-  ¿Qué hace esto?
-  Toma el elemento con id="app" del HTML (el div donde vamos a renderizar todo).
-  Lo guarda en la constante app para poder usarlo más adelante.
 
-  2.2 
+=====>
+            function router() {
+              const user = getUserStorage(); 
+              if (!user) {  
+                renderPublic(app);
+              } else if (user.role === 'admin') {
+                renderDashboard(app); 
+              } else {
+                renderPublic(app); //☢️(Cambiar por vista de usuario)
+              }
+            }
+
+            router();
+
+
+  2.1 "const app = document.getElementById('app');"
+
+        ¿Qué hace esto?
+        Toma el elemento con id="app" del HTML (el div donde vamos a renderizar todo).
+        Lo guarda en la constante app para poder usarlo más adelante.
+
+
+  2.2  "const user = getUserStorage(); "
+
+        Esa función revisa si hay un usuario guardado en localStorage
+        i sí hay, lo guarda en la variable user.
+        Si el usuario ya inició sesión antes, sus datos están guardados y user tendrá algo como:
+          {
+          id: 1,
+          name: "Vane",
+          role: "admin"
+        }
+
+  2.3 " if (!user) {  
+                renderPublic(app); "
+
+      ❓¿Qué significa if (!user)?
+        Es una forma de preguntar: “¿NO hay usuario?”
+        !user se lee como “no existe un usuario”
+        Si es cierto, entonces mostramos la vista pública llamando a renderPublic(app);
+        O sea: si nadie ha iniciado sesión, mostramos la pantalla pública.
+
+  2.4 "  } else if (user.role === 'admin') {
+      renderDashboard(app); "
+
+        🧑‍💼 ¿Qué hace esto?
+        Si sí hay un usuario, entonces revisamos su role
+        Si su rol es 'admin', mostramos el panel de administración     
+
+
+  2.5   "} else {
+        renderUserHome(app); // Vista de usuario
+      }"
+
+        ¿Qué pasa aquí?
+        Si el usuario existe pero no es admin, mostramos Vista de usuario
+
+  2.6   router(); // ejecutamos al inicio
+
+  Resumen visual
+
+        Si NO hay usuario guardado en localStorage:
+            → Mostrar vista pública (renderPublic)
+
+        Si hay usuario Y su rol es "admin":
+            → Mostrar vista admin (renderDashboard)
+
+        Si hay usuario pero NO es admin:
+            → Mostrar Vista de usuario
+
+
+✨ ¿Cómo se debe nombrar una función en JavaScript?
+
+🔸 El nombre debe indicar lo que hace la función.
+🔸 No importa cómo la llames, lo importante es que tenga sentido.
+🔤 Ejemplos comunes según lo que hace la función:          
+
+| Nombre      | Cuándo se usa                                      | Ejemplo                 |
+| ----------- | -------------------------------------------------- | ----------------------- |
+| `renderX()` | Si la función **muestra algo en pantalla** (HTML)  | `renderLogin(app)`      |
+| `getX()`    | Si la función **trae algo** (datos, usuarios, etc) | `getCourses()`          |
+| `saveX()`   | Si la función **guarda** algo                      | `saveUserStorage(user)` |
+| `createX()` | Si la función **crea un nuevo recurso**            | `createCourse()`        |
+| `updateX()` | Si la función **edita o actualiza** algo           | `updateUser(id, data)`  |
+| `deleteX()` | Si **elimina** un recurso                          | `deleteCourse(id)`      |
+
+✅ Entonces...
+Si tu función carga una vista o contenido HTML, el nombre ideal sería:
+
+renderLogin()
+renderDashboard()
+renderUserHome()
+renderPublic()
+
+Si solo trae datos (como fetch a json-server), sería:
+
+getUsers()
+getCourses()
+
+Si guarda algo en localStorage:
+
+saveUserStorage()
+
+
+PASO 3
+//función en public.js (src/pages/public.js)
+
+    📍Línea 1
+      export function renderPublic(app) {
+          🔍 Explicación:
+
+    export: significa que esta función puede ser usada en otros archivos (como en main.js).
+    function: estamos declarando una función.
+    renderPublic: es el nombre de la función. Elegimos ese nombre porque esta función va a renderizar la vista pública (cuando nadie está logueado).
+    (app): es un parámetro. Es el div donde vamos a insertar el contenido HTML dinámico, normalmente el div con id="app" que ya seleccionamos en main.js.
+
+    📍Línea 2
+
+            app.innerHTML = ` 
+            <section>
+              <h2>Bienvenido a la Plataforma Educativa</h2>
+              <p>Por favor, inicia sesión o regístrate para acceder a los cursos.</p>
+              <button id="login-btn">Iniciar Sesión</button>
+              <button id="register-btn">Registrarse</button>
+            </section>
+          `;
+        // Ahora sí existen los botones en el DOM, podemos acceder a ellos
+          document.getElementById('login-btn').addEventListener('click',()=> {
+              console.log('Click en login');
+              renderLogin(app);
+          });
+
+          document.getElementById('register-btn').addEventListener('click',()=> {
+              console.log('Click en register');
+              //renderRegister(app); <= Activarlo
+          });
+        }
+
+
+  🔍 Explicación:
+      app: es el parámetro recibido (el contenedor principal de la app).
+      .innerHTML: es una propiedad de JavaScript que permite escribir contenido HTML dentro de ese contenedor.
+      `= ``: le estamos diciendo que vamos a escribir un bloque de HTML usando backticks (``) para usar template strings.
+
+
+PASO4 
+    // src/pages/login.js
+
+      export function renderLogin(app) {
+        app.innerHTML = `
+          <section class="login-section">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+              <label for="email">Correo:</label>
+              <input type="email" id="email" name="email" required />
+
+              <label for="password">Contraseña:</label>
+              <input type="password" id="password" name="password" required />
+
+              <button type="submit">Ingresar</button>
+            </form>
+            <button id="back-btn">← Volver</button>
+          </section>
+        `;
+
+        // Escuchar envío del formulario
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+          e.preventDefault();
+          console.log('Login enviado');
+          // Aquí luego haremos la lógica de login con json-server
+        });
+
+        // Volver a la vista pública
+        document.getElementById('back-btn').addEventListener('click', () => {
+          window.location.hash = '#/';
+        });
+      }
+
+    🧠 Explicación palabra por palabra (como te gusta 💛):
+    export function renderLogin(app) → Exportamos esta función para que pueda ser usada en main.js.
+    app.innerHTML = → Reemplaza todo el contenido del div id="app" con el formulario.
+    <form id="login-form"> → Es el formulario para ingresar correo y contraseña.
+    e.preventDefault() → Evita que el formulario recargue la página al enviar.
+    console.log('Login enviado') → Por ahora, solo probamos que todo funcione.
+    window.location.hash = '#/' → Esto es para navegar de regreso a la vista pública como si fuera una SPA.
+
+
+  PASO5
+  ✅ Paso 1: Revisar tu db.json
+
+        Asegúrate de tener algo así (puedes agregarlo si no lo tienes):
+
+        {
+          "users": [
+            {
+              "id": 1,
+              "name": "Admin",
+              "email": "admin@admin.com",
+              "password": "admin123",
+              "role": "admin"
+            },
+            {
+              "id": 2,
+              "name": "Vanecita",
+              "email": "vane@user.com",
+              "password": "1234",
+              "role": "user"
+            }
+          ]
+        }
+
+        Con eso tenemos un admin y un usuario normal para probar 🔐
+
+
+PASO 6  
+        En services guardamos todos los archivos que "hablan" con el servidor o con una API externa.
+        Como auth.js se encarga de conectarse con JSON Server para verificar usuarios, va ahí.
+        📁 Ubicación:
+          spa-system/
+            └── src/
+                └── services/
+                      └── auth.js
+
+
+        const API_URL = 'http://localhost:3000/users'; //endpoint de usuarios
+
+        export async function loginUser(email, password) {
+            try {
+                const res = await fetch (`${API_URL}?email=${email}&password=${password}`);
+                const users = await res.json();
+
+                //Si encontró un usuario que coincida con email y password
+                if (users.length > 0){
+                    return users[0]; // Usuario encontrado
+                } else {
+                    return null; //Usuario no existe
+                } 
+            } catch(error) {
+                console.log('Error en loginUser', error);
+                return null;
+            }
+        };
+
+🔐 auth.js explicado palabra por palabra
+const API_URL = 'http://localhost:3000/users';
+
+    🔸 const: es una constante, un valor que no va a cambiar.
+    🔸 API_URL: le damos un nombre claro → es la URL de la base de datos db.json.
+    🔸 'http://localhost:3000/users':
+
+        localhost:3000 → Es donde se levanta JSON Server.
+        /users → es la colección de usuarios dentro del db.json.
+      🧠 Esto es como decir: “Mi base de datos vive en esta dirección”
+
+export async function loginUser(email, password) {
+    🔸 export: permite que esta función se pueda usar en otros archivos (como login.js).
+    🔸 async: indica que esta función es asíncrona, o sea, espera datos del servidor (porque fetch es asíncrono).
+    🔸 function loginUser(...): estamos creando una función llamada loginUser.
+    🔸 (email, password): son los datos que el usuario escribe en el formulario, y los pasamos para buscarlos en la base de datos.
+
+try {
+      const res = await fetch(`${API_URL}?email=${email}&password=${password}`);
+
+    🔸 try { ... }: bloque que intenta ejecutar código, por si hay errores.
+    🔸 await fetch(...): usamos fetch para ir a buscar los datos.
+    🔸 `${API_URL}?email=${email}&password=${password}`:
+    Esto genera una URL como:
+
+    http://localhost:3000/users?email=admin@admin.com&password=admin123
+
+    🔍 Esa URL busca usuarios que tengan ese email y esa contraseña exactos.
+    
+const users = await res.json();
+    🔸 res: es la respuesta que da el servidor.
+    🔸 .json(): convertimos esa respuesta a formato JSON para poder trabajar con los datos en JS.
+    🔸 const users: lo que nos llega del servidor lo guardamos en esta variable.
+
+  if (users.length > 0) {
+    return users[0];
+  } else {
+    return null;
+  }
+    🔸 if (users.length > 0): Si encontró al menos un usuario con ese correo y contraseña...
+    🔸 return users[0]: devuelve el primer usuario encontrado (siempre debe ser solo uno).
+    🔸 else return null: si no encuentra nada, devuelve null → es como decir “Usuario incorrecto”.
+
+} catch (error) {
+  console.error('Error en loginUser:', error);
+  return null;
+}
+
+    🔸 catch: si algo falla, entra aquí (por ejemplo, si no hay internet o el server no responde).
+    🔸 console.error(...): muestra el error en la consola para que podamos ver qué pasó.
+    🔸 return null: si hay error, también devolvemos null para que el programa no se rompa.
+
+const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const user = await loginUser(email, password);
+
+    if (user) {
+      localStorage.setItem('loggedUser', JSON.stringify(user));
+      window.location.hash = ''; // Redirige a la vista según su rol
+    } else {
+      alert('Correoo o contraseña incorrectos');
+    }
+  });
+
+        ✨ Explicación palabra por palabra:
+        localStorage.setItem('loggedUser', JSON.stringify(user))
+        🔹 localStorage: Es un almacenamiento local del navegador.
+        🔹 .setItem(clave, valor): Guarda un valor con una clave, como una cajita.
+
+        ✅ "loggedUser": Es el nombre que usamos para guardar al usuario (puedes llamarlo como quieras, pero debe ser el mismo nombre para leerlo después).
+
+        ✅ JSON.stringify(user): Convierte el objeto usuario a texto plano.
+        Porque localStorage solo guarda texto. Luego lo leeremos con JSON.parse().
+
+
+✅ 1. Funciones normales (declaradas)
+Aquí el async va antes de la palabra function:
+
+      async function nombreFuncion() {
+        const respuesta = await fetch('https://api.com');
+      }
+📌 Estructura completa:
+
+      [async] [function] [nombre]() {
+        // código
+      }
+
+✅ 2. Funciones anónimas o funciones flecha (arrow functions)
+
+      Aquí el async va antes de los paréntesis ( ) => {}
+      O sea, antes de la función misma, como si envolvieras todo:
+
+      const miFuncion = async () => {
+        const datos = await fetch('...');
+      }
+
+  📌 O si es dentro de un addEventListener, como tú usas:
+
+        boton.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const datos = await fetch('...');
+        });
+🧠 Es decir: async siempre se pone justo antes de la función completa, sea normal o flecha.
+
+❗ NO válido:
+Esto no funciona (mal puesto el async):
+        // ❌ INCORRECTO: esto lanza error
+        (e) => async {
+          const datos = await fetch(...);
+        }
+
+Ejemplo comparativo:
+
+        | Tipo de función       | Forma correcta                                    |
+        | --------------------- | ------------------------------------------------- |
+        | Declarada tradicional | `async function cargarDatos() { ... }`            |
+        | Función flecha        | `const cargarDatos = async () => { ... }`         |
+        | En addEventListener   | `addEventListener('click', async (e) => { ... })` |
+
+💡 BONUS: ¿Por qué cambia?
+Porque function tiene su propia palabra clave.
+En cambio () => {} es una expresión (una constante que guarda una función),
+así que async tiene que ir antes de toda la expresión, no dentro
+

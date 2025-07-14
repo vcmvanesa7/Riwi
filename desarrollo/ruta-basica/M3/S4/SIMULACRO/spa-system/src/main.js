@@ -1013,3 +1013,121 @@ Solo dime y te organizo todo bien maquetado con CSS y validaciones.
 ¡Vamos con toda! Ya casi terminas tu super prueba, Vane 🙌💪✨
 ¿Seguimos con alguna parte específica de este CRUD?
 
+
+¡Vamos a revisarlo paso a paso, Vane querida! 💪✨
+Si el botón de “Registrarse” no está funcionando, revisaremos lo esencial para que funcione correctamente:
+
+
+---
+
+✅ 1. ¿Está escuchando el evento?
+
+Dentro de tu archivo login.js o public.js, debes tener algo como esto:
+
+document.getElementById('register-btn').addEventListener('click', () => {
+  window.location.hash = '#/register';
+});
+
+🔍 Verifica que:
+
+El botón en el HTML tenga exactamente el ID register-btn.
+
+Estás escuchando el evento correctamente después de insertar el HTML con app.innerHTML = ....
+
+Estás usando window.location.hash = '#/register' si tu router depende del hash.
+
+
+
+---
+
+✅ 2. ¿El botón está correctamente definido en el HTML?
+
+Asegúrate de que en tu renderPublic(app) o donde esté tu vista pública, tengas algo así:
+
+<button id="register-btn">Registrarse</button>
+
+⚠️ ¡IMPORTANTE!: Si escribiste el innerHTML después de hacer el addEventListener, no va a funcionar porque el elemento aún no existía. Primero se inyecta el HTML, luego se añade el evento.
+
+
+---
+
+✅ 3. ¿Tu función router() tiene una condición para #/register?
+
+Ejemplo:
+
+function router() {
+  const route = window.location.hash;
+
+  const user = getUserStorage();
+  if (!user) {
+    if (route === '#/register') {
+      renderRegister(app); // 👈 esta función debe existir
+    } else {
+      renderPublic(app);
+    }
+  }
+  // ... resto para admin y user
+}
+
+
+---
+
+✅ 4. ¿Tienes la función renderRegister(app) exportada?
+
+Debe estar algo así en tu archivo register.js:
+
+export function renderRegister(app) {
+  app.innerHTML = `
+    <h2>Registro de Usuario</h2>
+    <form id="register-form">
+      <!-- inputs -->
+      <button type="submit">Registrarse</button>
+    </form>
+    <button id="back-btn">← Volver</button>
+  `;
+
+  // Lógica de formulario
+}
+
+Y en main.js debe estar importada:
+
+import { renderRegister } from './pages/register.js';
+
+
+---
+
+✅ 5. Revisa la consola del navegador (F12)
+
+Ahí puede salirte un error como:
+
+Cannot read properties of null (reading 'addEventListener')
+
+renderRegister is not defined
+
+Error de rutas mal escritas
+
+
+
+---
+
+🛠 Conclusión rápida:
+
+Si todo está bien:
+
+✅ El botón tiene ID correcto (register-btn)
+
+✅ Se escucha el evento después de insertar el HTML
+
+✅ Tu router() reconoce #/register
+
+✅ Existe e importaste renderRegister(app)
+
+
+👉 Funciona perfecto.
+
+
+---
+
+¿Quieres que te revise tu código public.js y main.js para ayudarte más rápido?
+Puedes pegar esa parte y lo hacemos juntas. ¡Estoy aquí para que ganes esa prueba! 💪🌟
+
